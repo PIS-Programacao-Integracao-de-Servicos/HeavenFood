@@ -1,0 +1,118 @@
+/* Resetando alguns estilos padrão */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Configurações do corpo da página */
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f7f7f7; /* Cor neutra e suave */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+/* Container principal para centralizar os formulários */
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    max-width: 900px;
+    width: 100%;
+}
+
+/* Estilo para cada formulário */
+.form-container {
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    padding: 40px;
+    width: 350px;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Efeito de hover para o container do formulário */
+.form-container:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+}
+
+/* Títulos */
+h2 {
+    margin-bottom: 20px;
+    color: #333;
+    font-weight: 600;
+    font-size: 28px;
+}
+
+/* Estilo dos campos de entrada */
+input {
+    width: 100%;
+    padding: 14px;
+    margin: 12px 0;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+}
+
+/* Efeito de foco no campo de input */
+input:focus {
+    border-color: #57b86f; /* Verde claro relacionado a alimentos frescos */
+    outline: none;
+}
+
+/* Estilo do botão */
+button.btn {
+    width: 100%;
+    padding: 14px;
+    font-size: 18px;
+    color: #fff;
+    background-color: #57b86f; /* Verde claro e fresco */
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    margin-top: 20px;
+    text-transform: uppercase;
+}
+
+/* Efeito de hover para os botões */
+button:hover {
+    background-color: #489d5f; /* Cor mais escura ao passar o rato */
+    transform: scale(1.05);
+}
+
+/* Estilo para os botões de alternância */
+.form-switch {
+    margin-top: 15px;
+}
+
+.form-switch button {
+    font-size: 14px;
+    color: #57b86f; /* Verde claro */
+    background: none;
+    border: none;
+    cursor: pointer;
+    text-decoration: underline;
+    transition: color 0.3s ease;
+}
+
+/* Efeito de hover para os botões de alternância */
+.form-switch button:hover {
+    color: #489d5f; /* Verde mais escuro */
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+    }
+}
