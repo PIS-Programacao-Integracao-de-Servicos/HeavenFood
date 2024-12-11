@@ -75,7 +75,7 @@ loginForm.addEventListener('submit', async (event) => {
             throw new Error(data.message || 'Erro no início de sessão');
         }
 
-        window.location.href = 'http://localhost:3000/home'; // Redireciona após início de sessão bem-sucedido
+        window.location.href = 'http://localhost:3000/index'; // Redireciona após início de sessão bem-sucedido
     } catch (error) {
         alert(`Erro: ${error.message}`);
     }

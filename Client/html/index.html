@@ -1,42 +1,69 @@
 <!DOCTYPE html>
 <html lang="pt-pt">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastro e Início de Sessão</title>
-    <link rel="stylesheet" href="../css/style.css">
+    <title>Food Heaven - Página Inicial</title>
+    <link rel="stylesheet" href="../css/homePage.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 </head>
+
 <body>
-    <div class="container">
-        <!-- Formulário de Registo -->
-        <div class="form-container" id="signup-form-container">
-            <h2>Registo</h2>
-            <form id="signup-form">
-                <input type="text" id="signup-name" placeholder="Nome" required>
-                <input type="email" id="signup-email" placeholder="Email" required>
-                <input type="password" id="signup-password" placeholder="Senha" required>
-                <button type="submit" class="btn">Registar</button>
-                <div class="form-switch">
-                    <button type="button" id="show-login">Já tem conta? Iniciar sessão</button>
-                </div>
-            </form>
-        </div>
+    <!-- Barra de Navegação -->
+    <header>
+        <nav class="navbar">
+            <div class="logo">Food Heaven</div>
+            <ul class="nav-links">
+                <li><a href="index.html">Início</a></li>
+                <li><a href="recipes.html">Receitas</a></li>
+                <li><a href="about.html">Sobre Nós</a></li>
+                <li><a href="contact.html">Contato</a></li>
+                <li><a href="auth.html" class="btn">Entrar/Registrar</a></li>
+            </ul>
+        </nav>
+    </header>
 
-        <!-- Formulário de Início de Sessão -->
-        <div class="form-container" id="login-form-container">
-            <h2>Início de Sessão</h2>
-            <form id="login-form">
-                <input type="email" id="login-email" placeholder="Email" required>
-                <input type="password" id="login-password" placeholder="Senha" required>
-                <button type="submit" class="btn">Entrar</button>
-                <div class="form-switch">
-                    <button type="button" id="show-signup">Ainda não tem conta? Registe-se</button>
-                </div>
-            </form>
-        </div>
-    </div>
+    <!-- Seção de Destaques -->
+    <main>
+        <section class="hero">
+            <div class="hero-content">
+                <h1>Bem-vindo ao Food Heaven</h1>
+                <p>Descubra receitas deliciosas e saudáveis para todas as ocasiões!</p>
+                <a href="recipes.html" class="btn">Explorar Receitas</a>
+            </div>
+        </section>
 
-    <script src="../js/script.js"></script>
+        <section class="featured-recipes">
+            <h2>Receitas em Destaque</h2>
+            <div class="recipes-grid">
+                <div class="recipe-card">
+                    <img src="../images/receita1.jpg" alt="Receita 1">
+                    <h3>Título da Receita</h3>
+                    <p>Descrição breve da receita.</p>
+                    <a href="#" class="btn">Ver Receita</a>
+                </div>
+                <div class="recipe-card">
+                    <img src="../images/receita2.jpg" alt="Receita 2">
+                    <h3>Título da Receita</h3>
+                    <p>Descrição breve da receita.</p>
+                    <a href="#" class="btn">Ver Receita</a>
+                </div>
+                <div class="recipe-card">
+                    <img src="../images/receita3.jpg" alt="Receita 3">
+                    <h3>Título da Receita</h3>
+                    <p>Descrição breve da receita.</p>
+                    <a href="#" class="btn">Ver Receita</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Rodapé -->
+    <footer>
+        <p>&copy; 2024 Food Heaven. Todos os direitos reservados.</p>
+    </footer>
+
 </body>
+
 </html>
