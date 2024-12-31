@@ -1,82 +1,52 @@
-// formulários de registo e início de sessão
-const signupFormContainer = document.getElementById('signup-form-container');
-const loginFormContainer = document.getElementById('login-form-container');
+document.getElementById('signup-form').addEventListener('submit', async (event) => {
+    event.preventDefault(); // Impede o comportamento padrão do formulário
 
-// Obtenha os formulários pelos seus IDs
-const signupForm = document.getElementById('signup-form');
-const loginForm = document.getElementById('login-form');
-
-// Exibir apenas o formulário de início de sessão inicialmente
-signupFormContainer.style.display = 'none';
-loginFormContainer.style.display = 'block';
-
-// Função para alternar entre Registo e Início de Sessão
-function showForm(form) {
-    if (form === 'signup') {
-        signupFormContainer.style.display = 'block';
-        loginFormContainer.style.display = 'none';
-    } else {
-        signupFormContainer.style.display = 'none';
-        loginFormContainer.style.display = 'block';
-    }
-}
-
-// Eventos para alternar entre os formulários
-document.getElementById('show-signup').addEventListener('click', () => showForm('signup'));
-document.getElementById('show-login').addEventListener('click', () => showForm('login'));
-
-// Função para registar um novo utilizador
-signupForm.addEventListener('submit', async (event) => {
-    event.preventDefault();
-
-    const name = document.getElementById('signup-name').value;
+    const nome = document.getElementById('signup-name').value;
     const email = document.getElementById('signup-email').value;
-    const password = document.getElementById('signup-password').value;
+    const senha = document.getElementById('signup-password').value;
 
     try {
-        const response = await fetch('http://localhost:3000/api/auth/signup', {
+        const response = await fetch('/auth/signup', {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ nome: name, email: email, senha: password })
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ nome, email, senha })
         });
 
         const data = await response.json();
-        if (!response.ok) {
-            throw new Error(data.message || 'Erro no registo');
-        }
-
         alert(data.message);
-        showForm('login'); // Após registo, alterna para o formulário de início de sessão
+
+        if (response.ok) {
+            // Redirecionar para o login se o registo for bem-sucedido
+            window.location.href = '/auth/login';
+        }
     } catch (error) {
-        alert(`Erro: ${error.message}`);
+        console.error('Erro ao registar:', error);
     }
 });
 
-// Função para fazer início de sessão
-loginForm.addEventListener('submit', async (event) => {
-    event.preventDefault();
+document.getElementById('login-form').addEventListener('submit', async (event) => {
+    event.preventDefault(); // Impedir o envio padrão do formulário
 
     const email = document.getElementById('login-email').value;
-    const password = document.getElementById('login-password').value;
+    const senha = document.getElementById('login-password').value;
+
+    console.log('Dados enviados:', { email, senha }); // Para verificar no console
 
     try {
-        const response = await fetch('http://localhost:3000/api/auth/login', {
+        const response = await fetch('/auth/login', {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ email: email, senha: password })
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, senha })
         });
 
         const data = await response.json();
-        if (!response.ok) {
-            throw new Error(data.message || 'Erro no início de sessão');
+        if (response.ok) {
+            alert(data.message);
+            window.location.href = '/'; // Redirecionar para a página principal
+        } else {
+            alert(data.message);
         }
-
-        window.location.href = 'http://localhost:3000/home'; // Redireciona após início de sessão bem-sucedido
     } catch (error) {
-        alert(`Erro: ${error.message}`);
+        console.error('Erro ao iniciar sessão:', error);
     }
 });

@@ -1,13 +1,5 @@
 const bcrypt = require('bcryptjs');
-const mysql = require('mysql2');
-
-// Conexão com a base de dados MySQL
-const db = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  password: 'root',
-  database: 'ReceitaDB'
-});
+const db = require('../dbConnection');
 
 db.connect((err) => {
   if (err) throw err;
@@ -16,6 +8,7 @@ db.connect((err) => {
 
 // Função para registo de novo utilizador
 const signup = async (req, res) => {
+  console.log(req.body);
   const { nome, email, senha } = req.body;
 
   // Verificar se o email já existe
@@ -39,9 +32,14 @@ const signup = async (req, res) => {
 
 // Função para iniciar sessão
 const login = (req, res) => {
+  console.log('Método:', req.method);
+  console.log('Body recebido no servidor:', req.body);
   const { email, senha } = req.body;
 
-  // Verificar se o e-mail existe na base de dados
+  if (!email || !senha) {
+    return res.status(400).json({ message: 'E-mail ou senha não fornecidos!' });
+}
+
   db.query('SELECT * FROM Utilizadores WHERE email = ?', [email], async (err, result) => {
     if (err) throw err;
 
@@ -58,9 +56,9 @@ const login = (req, res) => {
       return res.status(400).json({ message: 'E-mail ou senha inválidos!' });
     }
 
-    // Criar a sessão para o utilizador
+    // Sessão e redirecionamento
     req.session.userId = user.id;
-    res.status(200).json({ message: 'Início de sessão bem-sucedido!' });
+    res.redirect('/'); // Redirecionar para a página inicial
   });
 };
 

@@ -1,11 +1,19 @@
 const express = require('express');
 const router = express.Router();
 const { signup, login } = require('../modules/authModule');
+const path = require('path');
 
-// Rota de registo (signup)
+router.get('/signup', (req, res) => {
+    res.sendFile(path.join(__dirname, '../../Client/html/signup.html'));
+  });
+
 router.post('/signup', signup);
 
-// Rota de login
+router.get('/login', (req, res) => {
+    res.sendFile(path.join(__dirname, '../../Client/html/login.html'))
+  });
+
 router.post('/login', login);
+
 
 module.exports = router;
