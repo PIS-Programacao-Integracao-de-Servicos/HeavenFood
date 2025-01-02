@@ -56,9 +56,9 @@ const login = (req, res) => {
       return res.status(400).json({ message: 'E-mail ou senha inválidos!' });
     }
 
-    // Sessão e redirecionamento
+    // Sessão
     req.session.userId = user.id;
-    res.redirect('/'); // Redirecionar para a página inicial
+    res.status(200).json({ message: 'Login bem-sucedido!' });
   });
 };
 

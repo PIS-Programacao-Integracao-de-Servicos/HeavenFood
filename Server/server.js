@@ -6,7 +6,6 @@ const path = require('path');
 const app = express();
 const port = 3000;
 
-
 // Habilitar CORS para o cliente web
 app.use(cors({ origin: 'http://localhost:8081', credentials: true }));
 app.use(express.static(path.join(__dirname, '../Client')));

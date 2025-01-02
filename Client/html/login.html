@@ -13,9 +13,9 @@
     <!-- Formulário de Login -->
     <div class="form-container" id="login-form-container">
         <h2>Início de Sessão</h2>
-        <form id="login-form" action="http://localhost:3000/auth/login" method="POST">
-            <input type="email" id="login-email" placeholder="Email" required>
-            <input type="password" id="login-password" placeholder="Senha" required>
+        <form id="login-form" method="POST">
+            <input type="email" id="login-email" name="email" placeholder="Email" required>
+            <input type="password" id="login-password" name="senha" placeholder="Senha" required>
             <button type="submit" class="btn">Entrar</button>
             <div class="form-switch">
                 <button type="button" id="show-signup">Não tem conta? Registe-se</button>
@@ -23,7 +23,7 @@
         </form>
     </div>
 
-    <script src="../js/script.js"></script>
+    <script src="../js/login.js"></script>
 </body>
 
 </html>
