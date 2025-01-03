@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="pt-pt">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Início de Sessão</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Formulário de Login -->
+    <div class="form-container" id="login-form-container">
+        <h2>Início de Sessão</h2>
+        <form id="login-form" method="POST">
+            <input type="email" id="login-email" name="email" placeholder="Email" required>
+            <input type="password" id="login-password" name="senha" placeholder="Senha" required>
+            <button type="submit" class="btn">Entrar</button>
+            <div class="form-switch">
+                <button type="button" id="show-signup">Não tem conta? Registe-se</button>
+            </div>
+        </form>
+    </div>
+
+    <script src="../js/login.js"></script>
+</body>
+
+</html>
