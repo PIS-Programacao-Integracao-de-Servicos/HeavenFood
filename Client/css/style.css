@@ -20,10 +20,9 @@
     font-style: normal;
 }
 
-/* Header default for every page */
 header {
     height: 3rem;
-    background-color: var(--primary-color); /* Substitui pelo marrom */
+    background-color: var(--primary-color);
     padding: 10px 20px;
 }
 
@@ -34,15 +33,15 @@ header {
 }
 
 .logo {
-    font-size: var(--font-size-large); /* Usa o tamanho definido */
+    font-size: var(--font-size-large);
     font-weight: bold;
-    color: white /* Substitui pelo amarelo claro */
+    color: white;
 }
 
 .nav-links {
     list-style: none;
     display: flex;
-    gap: var(--spacing); /* Espaçamento definido */
+    gap: var(--spacing); 
 }
 
 .nav-links li {
@@ -50,15 +49,15 @@ header {
 }
 
 .nav-links a {
-    color: white; /* Substitui pelo amarelo claro */
+    color: white; 
     text-decoration: none;
     font-size: 16px;
     font-weight: 600;
 }
 
 .nav-links a.btn {
-    background-color: var(--detail-color); /* Fundo amarelo claro */
-    color: var(--primary-color); /* Texto marrom */
+    background-color: var(--detail-color);
+    color: var(--primary-color);
     padding: 8px 16px;
     border-radius: 5px;
     text-transform: uppercase;
