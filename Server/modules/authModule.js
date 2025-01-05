@@ -1,6 +1,7 @@
 const bcrypt = require('bcryptjs');
 const db = require('../dbConnection');
 
+// Conexão à base de dados
 db.connect((err) => {
   if (err) throw err;
   console.log('Conectado à base de dados!');
@@ -8,12 +9,11 @@ db.connect((err) => {
 
 // Função para registo de novo utilizador
 const signup = async (req, res) => {
-  console.log(req.body);
   const { nome, email, senha } = req.body;
 
-  // Verificar se o email já existe
-  db.query('SELECT * FROM Utilizadores WHERE email = ?', [email], async (err, result) => {
-    if (err) throw err;
+  try {
+    // Verificar se o email já existe
+    const [result] = await db.promise().query('SELECT * FROM Utilizadores WHERE email = ?', [email]);
 
     if (result.length > 0) {
       return res.status(400).json({ message: 'Email já registado!' });
@@ -23,43 +23,52 @@ const signup = async (req, res) => {
     const hashedPassword = await bcrypt.hash(senha, 10);
 
     // Inserir o novo utilizador na base de dados
-    db.query('INSERT INTO Utilizadores (nome, email, senha_hash) VALUES (?, ?, ?)', [nome, email, hashedPassword], (err) => {
-      if (err) throw err;
-      res.status(201).json({ message: 'Utilizador registado com sucesso!' });
-    });
-  });
+    await db.promise().query('INSERT INTO Utilizadores (nome, email, senha_hash) VALUES (?, ?, ?)', [nome, email, hashedPassword]);
+
+    res.status(201).json({ message: 'Utilizador registado com sucesso!' });
+  } catch (err) {
+    console.error('Erro ao registar utilizador:', err);
+    res.status(500).json({ message: 'Erro ao processar o registo!' });
+  }
 };
 
-// Função para iniciar sessão
+// Função para autenticar e iniciar sessão
 const login = (req, res) => {
-  console.log('Método:', req.method);
-  console.log('Body recebido no servidor:', req.body);
-  const { email, senha } = req.body;
+  try {
+      console.log('Método:', req.method);
+      console.log('Body recebido no servidor:', req.body);
 
-  if (!email || !senha) {
-    return res.status(400).json({ message: 'E-mail ou senha não fornecidos!' });
-}
+      const { email, senha } = req.body;
 
-  db.query('SELECT * FROM Utilizadores WHERE email = ?', [email], async (err, result) => {
-    if (err) throw err;
+      if (!email || !senha) {
+          return res.status(400).json({ message: 'E-mail ou senha não fornecidos!' });
+      }
 
-    if (result.length === 0) {
-      return res.status(400).json({ message: 'E-mail ou senha inválidos!' });
-    }
+      db.query('SELECT * FROM Utilizadores WHERE email = ?', [email], async (err, result) => {
+          if (err) {
+              console.error('Erro na consulta à base de dados', err);
+              return res.status(500).json({ message: 'Erro interno ao fazer login' });
+          }
 
-    const user = result[0];
+          if (result.length === 0) {
+              return res.status(400).json({ message: 'E-mail ou senha inválidos!' });
+          }
 
-    // Verificar se a senha fornecida é válida
-    const validPassword = await bcrypt.compare(senha, user.senha_hash);
+          const user = result[0];
 
-    if (!validPassword) {
-      return res.status(400).json({ message: 'E-mail ou senha inválidos!' });
-    }
+          const validPassword = await bcrypt.compare(senha, user.senha_hash);
 
-    // Sessão
-    req.session.userId = user.id;
-    res.status(200).json({ message: 'Login bem-sucedido!' });
-  });
+          if (!validPassword) {
+              return res.status(400).json({ message: 'E-mail ou senha inválidos!' });
+          }
+
+          req.session.user = { id: user.id, nome: user.nome };
+          return res.status(200).json({ message: 'Login bem-sucedido!', user: req.session.user });
+      });
+  } catch (error) {
+      console.error('Erro ao fazer login:', error);
+      res.status(500).json({ message: 'Erro interno ao fazer login' });
+  }
 };
 
 module.exports = { signup, login };
