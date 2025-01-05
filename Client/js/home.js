@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             console.log('Utilizador autenticado:', data.user.nome);
             authContainer.innerHTML = `
                 <span>Bem-vindo, ${data.user.nome}!</span>
-                <button id="logout-btn" class="btn">Sair</button>
+                <a href="" id="logout-btn" class="btn">Sair</a>
             `;
 
             document.getElementById('logout-btn').addEventListener('click', async () => {
