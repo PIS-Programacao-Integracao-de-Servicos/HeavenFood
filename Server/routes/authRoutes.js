@@ -15,4 +15,22 @@ router.get('/login', (req, res) => {
 
 router.post('/login', login);
 
+router.get('/session', (req, res) => {
+  if (req.session.user) {
+      return res.status(200).json({ loggedIn: true, user: req.session.user });
+  }
+  res.status(200).json({ loggedIn: false });
+});
+
+router.post('/logout', (req, res) => {
+  req.session.destroy((err) => {
+      if (err) {
+          console.error(err);
+          return res.status(500).json({ message: 'Erro ao encerrar sessão' });
+      }
+      res.clearCookie('connect.sid'); // Limpa o cookie da sessão
+      res.status(200).json({ message: 'Sessão encerrada com sucesso' });
+  });
+});
+
 module.exports = router;

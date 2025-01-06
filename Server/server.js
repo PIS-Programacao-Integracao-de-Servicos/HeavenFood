@@ -17,7 +17,6 @@ app.use(express.static(path.join(__dirname, '../Client')));
 app.use(express.json()); // Middleware para interpretar JSON
 app.use(express.urlencoded({ extended: true })); // Middleware para interpretar dados URL-encoded
 
-
 // Configuração de sessão
 app.use(session({
   secret: 'seu segredo',
