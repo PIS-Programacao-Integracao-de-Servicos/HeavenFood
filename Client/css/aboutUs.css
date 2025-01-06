@@ -82,6 +82,10 @@ header h1 {
     clear: both;
 }
 
+.values-list{
+    margin-left: 5px;
+}
+
 /* Rodapé */
 footer {
     background: var(--primary-color);
