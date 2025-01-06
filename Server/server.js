@@ -6,8 +6,7 @@ const path = require('path');
 const app = express();
 const port = 3000;
 const recipeRoutes = require('./routes/recipeRoutes');
-
-// Usar as rotas de receitas
+const aboutRoutes = require('./routes/aboutRoutes');
 
 
 // Habilitar CORS para o cliente web
@@ -17,6 +16,7 @@ app.use(express.static(path.join(__dirname, '../Client')));
 app.use(express.json()); // Middleware para interpretar JSON
 app.use(express.urlencoded({ extended: true })); // Middleware para interpretar dados URL-encoded
 
+app.use(express.static(path.join(__dirname, 'client')));
 
 // Configuração de sessão
 app.use(session({
@@ -30,6 +30,7 @@ app.use('/auth', authRoutes);
 
 app.use('/api/recipes', recipeRoutes);
 
+app.use('/api', aboutRoutes); 
 // Iniciar o servidor
 app.listen(port, () => {
   console.log(`Servidor rodando na porta ${port}`);
@@ -47,3 +48,7 @@ app.get('/', (req, res) => {
   app.get('/auth', (req, res) => {
     res.sendFile(path.join(__dirname, '../Client/html/auth.html'));
   });
+
+app.get('/aboutus', (req, res) => {
+  res.sendFile((path.join(__dirname, '../Client/html/aboutus.html')));
+})
