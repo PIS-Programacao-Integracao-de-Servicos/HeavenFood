@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us - Food Heaven</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/aboutUs.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <header>
+    <nav class="navbar">
+      <div class="logo">Food Heaven</div>
+      <ul class="nav-links">
+        <li><a href="/">Início</a></li>
+        <li><a href="recipes.html">Receitas</a></li>
+        <li><a href="/aboutus">Sobre Nós</a></li>
+        <li><a href="/">Contato</a></li>
+        <li><a href="/auth/login" class="btn">Entrar/Registar</a></li>
+      </ul>
+    </nav>
+  </header>
+
+
+  <main>
+
+    <div class="container">
+      <section class="about-section clearfix">
+        <h2>Sobre Nós</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque nec est id urna sagittis vehicula nec a
+          erat.</p>
+        <p>Nam hendrerit diam vitae diam pharetra, a tincidunt arcu ullamcorper. Duis sit amet mi massa.</p>
+      
+          <div class="values-list">
+            <h2 id="title"></h2>
+            <p id="description"></p>
+            <h3>Nossa Missão</h3>
+            <p id="mission"></p>
+            <h3>Nossa Visão</h3>
+            <p id="vision"></p>
+            <h3>Nossos Valores</h3>
+            <ul id="values"></ul>
+          </div>
+    </div>
+    <footer>
+      <p>&copy; 2025 Food Heaven. All rights reserved.</p>
+    </footer>
+
+  </main>
+</body>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+  fetch('/api/aboutus')  
+    .then(response => {
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      return response.json();
+    })
+    .then(data => {
+      document.getElementById("title").textContent = data.title;
+      document.getElementById("description").textContent = data.description;
+      document.getElementById("mission").textContent = data.mission;
+      document.getElementById("vision").textContent = data.vision;
+
+      const valuesList = document.getElementById("values");
+      valuesList.innerHTML = ""; 
+      data.values.forEach(function(value) {
+        const li = document.createElement("li");
+        li.textContent = value;
+        valuesList.appendChild(li);
+      });
+    })
+    .catch(error => console.error('Error fetching the about us data:', error));
+});
+
+
+</script>
+
+</html>
