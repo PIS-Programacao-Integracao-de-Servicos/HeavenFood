@@ -31,7 +31,6 @@ document.getElementById('login-form').addEventListener('submit', async (event) =
         }
 
         if (response.ok) {
-            alert(data.message);
             window.location.href = '/'; // Redirecionar para a página principal
         } else {
             alert(data.message);
