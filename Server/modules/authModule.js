@@ -1,12 +1,6 @@
 const bcrypt = require('bcryptjs');
 const db = require('../dbConnection');
 
-// Conexão à base de dados
-db.connect((err) => {
-  if (err) throw err;
-  console.log('Conectado à base de dados!');
-});
-
 // Função para registo de novo utilizador
 const signup = async (req, res) => {
   const { nome, email, senha } = req.body;

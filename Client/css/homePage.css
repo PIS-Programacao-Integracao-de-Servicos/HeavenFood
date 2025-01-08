@@ -9,7 +9,7 @@ main {
     color: var(--primary-color);
 }
 
-.hero {
+.welcome {
     height: 400px;
     display: flex;
     align-items: center;
@@ -19,7 +19,7 @@ main {
     padding: 20px;
 }
 
-.hero-content {
+.welcome-content {
     background-color: var(--primary-color);
     padding: 20px;
     border-radius: 10px;
@@ -55,4 +55,12 @@ footer {
     padding: var(--spacing); 
     background-color: var(--primary-color); 
     color: var(--detail-color); 
+}
+
+
+#recipes-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    padding: 20px;
 }

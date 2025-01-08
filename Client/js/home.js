@@ -41,3 +41,27 @@ document.addEventListener('DOMContentLoaded', async () => {
         console.error('Erro ao verificar sessão:', error);
     }
 });
+
+document.addEventListener('DOMContentLoaded', async () => {
+    try {
+        // Buscar apenas 3 receitas para a homepage
+        const response = await fetch('/recipes/api/highlight');
+        const recipes = await response.json();
+
+        const recipesGrid = document.querySelector('.recipes-grid');
+        recipesGrid.innerHTML = ''; // Limpa o grid antes de adicionar as receitas
+
+        recipes.forEach((recipe) => {
+            const recipeCard = document.createElement('div');
+            recipeCard.classList.add('recipe-card');
+            recipeCard.innerHTML = `
+                <h3 class="title">${recipe.nome}</h3>
+                <p>${recipe.descricao_preparacao}</p>
+                <p><strong>Categoria:</strong> ${recipe.categoria}</p>
+            `;
+            recipesGrid.appendChild(recipeCard);
+        });
+    } catch (error) {
+        console.error('Erro ao carregar receitas de destaque:', error);
+    }
+});
