@@ -12,7 +12,7 @@ document.getElementById('login-form').addEventListener('submit', async (event) =
     const email = document.getElementById('login-email').value;
     const senha = document.getElementById('login-password').value;
 
-    console.log('Dados enviados:', { email, senha }); // Para verificar no console
+    console.log('Dados enviados:', { email, senha });
 
     try {
         const response = await fetch('/auth/login', {

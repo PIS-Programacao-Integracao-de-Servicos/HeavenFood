@@ -17,11 +17,16 @@
 <body>
     <!-- Barra de Navegação -->
     <header>
+        
         <nav class="navbar">
-            <div class="logo">Food Heaven</div>
+            <div class ="logo">
+                <img src="../assets/logo/logo_without_background.png" alt="Food Heaven Logo" class="logo-image">
+                <div class="title">Food Heaven</div>
+            </div>
+            
             <ul class="nav-links">
                 <li><a href="/">Início</a></li>
-                <li><a href="recipes.html">Receitas</a></li>
+                <li><a href="/recipes">Receitas</a></li>
                 <li><a href="/aboutus">Sobre Nós</a></li>
                 <li><a href="/">Contato</a></li>
                 <li id="auth-container">
@@ -33,36 +38,18 @@
 
     <!-- Seção de Destaques -->
     <main>
-        <section class="hero">
-            <div class="hero-content">
+        <section class="welcome">
+            <div class="welcome-content">
                 <h1>Bem-vindo ao Food Heaven</h1>
                 <p>Descubra receitas deliciosas e saudáveis para todas as ocasiões!</p>
-                <a href="recipes.html" class="btn">Explorar Receitas</a>
+                <a href="/recipes" class="btn">Explorar Receitas</a>
             </div>
         </section>
 
         <section class="featured-recipes">
             <h2 class="title">Receitas em Destaque</h2>
-            <div class="recipes-grid">
-                <div class="recipe-card">
-                    <img src="../images/receita1.jpg" alt="Receita 1">
-                    <h3 class="title">Título da Receita</h3>
-                    <p>Descrição breve da receita.</p>
-                    <a href="#" class="btn">Ver Receita</a>
-                </div>
-                <div class="recipe-card">
-                    <img src="../images/receita2.jpg" alt="Receita 2">
-                    <h3 class="title">Título da Receita</h3>
-                    <p>Descrição breve da receita.</p>
-                    <a href="#" class="btn">Ver Receita</a>
-                </div>
-                <div class="recipe-card">
-                    <img src="../images/receita3.jpg" alt="Receita 3">
-                    <h3 class="title">Título da Receita</h3>
-                    <p>Descrição breve da receita.</p>
-                    <a href="#" class="btn">Ver Receita</a>
-                </div>
-            </div>
+        <section id="recipes-container" class="recipes-grid">
+            <!-- Receitas serão carregadas aqui -->
         </section>
     </main>
 

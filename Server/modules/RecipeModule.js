@@ -1,21 +1,9 @@
 const mysql = require('mysql2');
-
-// Conexão com a base de dados MySQL
-const db = mysql.createConnection({
-  host: '127.0.0.1',
-  user: 'root',
-  password: 'root',
-  database: 'ReceitaDB',
-});
-
-db.connect((err) => {
-  if (err) throw err;
-  console.log('Conexão ao banco de dados estabelecida!');
-});
+const db = require('../dbConnection');
 
 // Função para obter receitas
 const getRecipes = (req, res) => {
-  const query = 'SELECT * FROM Receita LIMIT 10'; // Por exemplo, limitar as receitas na Home Page
+  const query = 'SELECT * FROM Receita LIMIT 3'; // Por exemplo, limitar as receitas na Home Page
   db.query(query, (err, results) => {
     if (err) {
       res.status(500).json({ message: 'Erro ao buscar receitas!' });

@@ -27,7 +27,13 @@ app.use(session({
 // Usar as rotas de autenticação
 app.use('/auth', authRoutes);
 
-app.use('/api/recipes', recipeRoutes);
+// Rota para servir a página HTML de receitas
+app.get('/recipes', (req, res) => {
+  res.sendFile(path.join(__dirname, '../Client/html/recipes.html'));
+});
+
+// Rota da API para /recipes/*
+app.use('/recipes/api', recipeRoutes);
 
 app.use('/api', aboutRoutes); 
 // Iniciar o servidor
