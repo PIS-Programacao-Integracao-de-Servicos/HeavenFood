@@ -1,11 +1,11 @@
 document.addEventListener('DOMContentLoaded', async () => {
-    const recipesGrid = document.querySelector('.recipes-grid');
 
     try {
         const response = await fetch('/recipes/api/all');
         const recipes = await response.json();
 
-        recipesGrid.innerHTML = ''; // Limpa o grid antes de adicionar receitas
+        const recipesGrid = document.querySelector('.recipes-grid');
+        recipesGrid.innerHTML = ''; 
 
         recipes.forEach(recipe => {
             const card = document.createElement('div');
@@ -20,7 +20,6 @@ document.addEventListener('DOMContentLoaded', async () => {
                 <img src="${recipe.imagem_url || 'path/to/default-image.jpg'}" alt="${recipe.nome}" class="recipe-image" />
                 <h3>${recipe.nome}</h3>
                 <p><strong>Categoria:</strong> ${recipe.categoria || 'Sem categoria'}</p>
-                <p>${recipe.descricao_preparacao}</p>
             `;
             recipesGrid.appendChild(card);
         });

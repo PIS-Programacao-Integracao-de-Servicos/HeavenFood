@@ -44,19 +44,18 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 document.addEventListener('DOMContentLoaded', async () => {
     try {
-        // Buscar apenas 3 receitas para a homepage
         const response = await fetch('/recipes/api/highlight');
         const recipes = await response.json();
 
         const recipesGrid = document.querySelector('.recipes-grid');
-        recipesGrid.innerHTML = ''; // Limpa o grid antes de adicionar as receitas
+        recipesGrid.innerHTML = ''; 
 
         recipes.forEach((recipe) => {
             const recipeCard = document.createElement('div');
             recipeCard.classList.add('recipe-card');
             recipeCard.innerHTML = `
+                <img src="${recipe.imagem_url || 'path/to/default-image.jpg'}" alt="${recipe.nome}" class="recipe-image" />
                 <h3 class="title">${recipe.nome}</h3>
-                <p>${recipe.descricao_preparacao}</p>
                 <p><strong>Categoria:</strong> ${recipe.categoria}</p>
             `;
             recipesGrid.appendChild(recipeCard);

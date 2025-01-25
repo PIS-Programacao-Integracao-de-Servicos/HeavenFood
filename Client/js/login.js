@@ -1,13 +1,12 @@
-// Botão para ir do formulário de login para o de registo
 const showSignupButton = document.getElementById('show-signup');
 if (showSignupButton) {
     showSignupButton.addEventListener('click', () => {
-        window.location.href = '/auth/signup'; // Redirecionar para a página de registo
+        window.location.href = '/auth/signup';
     });
 }
 
 document.getElementById('login-form').addEventListener('submit', async (event) => {
-    event.preventDefault(); // Impedir o envio padrão do formulário
+    event.preventDefault(); 
 
     const email = document.getElementById('login-email').value;
     const senha = document.getElementById('login-password').value;
@@ -31,7 +30,7 @@ document.getElementById('login-form').addEventListener('submit', async (event) =
         }
 
         if (response.ok) {
-            window.location.href = '/'; // Redirecionar para a página principal
+            window.location.href = '/';
         } else {
             alert(data.message);
         }

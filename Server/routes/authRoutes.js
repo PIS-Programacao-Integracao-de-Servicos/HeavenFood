@@ -28,7 +28,7 @@ router.post('/logout', (req, res) => {
           console.error(err);
           return res.status(500).json({ message: 'Erro ao encerrar sessão' });
       }
-      res.clearCookie('connect.sid'); // Limpa o cookie da sessão
+      res.clearCookie('connect.sid');
       res.status(200).json({ message: 'Sessão encerrada com sucesso' });
   });
 });

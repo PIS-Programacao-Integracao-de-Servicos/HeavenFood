@@ -9,39 +9,33 @@ const recipeRoutes = require('./routes/recipeRoutes');
 const aboutRoutes = require('./routes/aboutRoutes');
 
 
-// Habilitar CORS para o cliente web
 app.use(cors({ origin: 'http://localhost:8081', credentials: true }));
 app.use(express.static(path.join(__dirname, '../Client')));
 
-app.use(express.json()); // Middleware para interpretar JSON
-app.use(express.urlencoded({ extended: true })); // Middleware para interpretar dados URL-encoded
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'client')));
 
-// Configuração de sessão
 app.use(session({
   secret: 'seu segredo',
   resave: false,
   saveUninitialized: true
 }));
 
-// Usar as rotas de autenticação
 app.use('/auth', authRoutes);
 
-// Rota para servir a página HTML de receitas
 app.get('/recipes', (req, res) => {
   res.sendFile(path.join(__dirname, '../Client/html/recipes.html'));
 });
 
-// Rota da API para /recipes/*
 app.use('/recipes/api', recipeRoutes);
 
 app.use('/api', aboutRoutes); 
-// Iniciar o servidor
+
 app.listen(port, () => {
   console.log(`Servidor rodando na porta ${port}`);
 });
 
-// Rota raiz para verificar se o servidor está rodando
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '../Client/html/index.html'));
   });
