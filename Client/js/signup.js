@@ -1,13 +1,12 @@
-// Botão para ir do formulário de registo para o de login
 const showLoginButton = document.getElementById('show-login');
 if (showLoginButton) {
     showLoginButton.addEventListener('click', () => {
-        window.location.href = '/auth/login'; // Redirecionar para a página de login
+        window.location.href = '/auth/login';
     });
 }
 
 document.getElementById('signup-form').addEventListener('submit', async (event) => {
-    event.preventDefault(); // Impede o comportamento padrão do formulário
+    event.preventDefault();
 
     const nome = document.getElementById('signup-name').value;
     const email = document.getElementById('signup-email').value;
@@ -24,7 +23,6 @@ document.getElementById('signup-form').addEventListener('submit', async (event) 
         alert(data.message);
 
         if (response.ok) {
-            // Redirecionar para o login se o registo for bem-sucedido
             window.location.href = '/auth/login';
         }
     } catch (error) {

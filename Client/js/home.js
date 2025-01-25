@@ -44,12 +44,11 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 document.addEventListener('DOMContentLoaded', async () => {
     try {
-        // Buscar apenas 3 receitas para a homepage
         const response = await fetch('/recipes/api/highlight');
         const recipes = await response.json();
 
         const recipesGrid = document.querySelector('.recipes-grid');
-        recipesGrid.innerHTML = ''; // Limpa o grid antes de adicionar as receitas
+        recipesGrid.innerHTML = ''; 
 
         recipes.forEach((recipe) => {
             const recipeCard = document.createElement('div');
