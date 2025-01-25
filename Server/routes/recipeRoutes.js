@@ -101,9 +101,7 @@ router.get('/all', async (req, res) => {
     try {
         const query = `
             SELECT 
-                Receita.id,
-                Receita.imagem_url,
-                Receita.nome, 
+                Receita.id,                Receita.nome, 
                 Receita.descricao_preparacao, 
                 RecipeCategories.nome AS categoria 
             FROM Receita 
@@ -144,8 +142,8 @@ router.get('/all', async (req, res) => {
 });
 
 // Rota para obter os detalhes de uma receita
-router.get('/details', async (req, res) => {
-    const recipeId = req.query.id;
+router.get('/details/:id', async (req, res) => {
+    const recipeId = req.params.id;
 
     if (!recipeId) {
         return res.status(400).json({ message: 'ID da receita não fornecido.' });
@@ -156,7 +154,6 @@ router.get('/details', async (req, res) => {
             SELECT 
                 Receita.id, 
                 Receita.nome, 
-                Receita.imagem_url, 
                 Receita.descricao_preparacao, 
                 RecipeCategories.nome AS categoria,
                 GROUP_CONCAT(Ingredientes.nome SEPARATOR ', ') AS ingredientes
@@ -192,6 +189,7 @@ router.get('/details', async (req, res) => {
         res.status(500).json({ message: 'Erro ao buscar detalhes da receita.' });
     }
 });
+
 
 
 module.exports = router;

@@ -1,39 +1,60 @@
 document.addEventListener('DOMContentLoaded', async () => {
-    const recipeDetailsContainer = document.getElementById('recipe-details');
 
-    // Obter o ID da receita a partir do parâmetro da URL
-    const params = new URLSearchParams(window.location.search);
-    const recipeId = params.get('id');
+    // Obter o ID diretamente da URL, usando pathname
+    const path = window.location.pathname;
+    const recipeId = path.split('/')[3]; // O ID estará na posição 3
 
+    // Verifica se o ID foi encontrado na URL
     if (!recipeId) {
-        recipeDetailsContainer.innerHTML = '<p>Receita não encontrada!</p>';
+        alert('ID da receita não encontrado na URL!');
         return;
     }
 
+    // Monta a URL da API para buscar os detalhes da receita
+    const apiUrl = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${recipeId}`;
+    console.log(apiUrl)
     try {
-        // Fazer a requisição à API para buscar os detalhes da receita
-        const response = await fetch(`/recipes/api/details?id=${recipeId}`);
-        const recipe = await response.json();
+        const response = await fetch(apiUrl);
+        const data = await response.json();
 
-        if (!recipe) {
-            recipeDetailsContainer.innerHTML = '<p>Receita não encontrada!</p>';
-            return;
+        // Verifica se a resposta contém uma receita
+        if (data.meals && data.meals.length > 0) {
+            const recipe = data.meals[0];
+
+            // Preenche os elementos da página com os dados da receita
+            document.getElementById('recipe-name').textContent = recipe.strMeal;
+            document.getElementById('recipe-category').textContent = `Categoria: ${recipe.strCategory}`;
+            document.getElementById('recipe-area').textContent = `Área: ${recipe.strArea}`;
+            document.getElementById('recipe-instructions').textContent = recipe.strInstructions;
+
+            // Atualiza a imagem da receita
+            document.getElementById('recipe-image').src = recipe.strMealThumb;
+
+            // Preenche os ingredientes
+            const ingredientsList = document.getElementById('recipe-ingredients');
+            ingredientsList.innerHTML = ''; // Limpa a lista antes de preencher
+            for (let i = 1; i <= 20; i++) {
+                const ingredient = recipe[`strIngredient${i}`];
+                const measure = recipe[`strMeasure${i}`];
+
+                if (ingredient && ingredient !== "") {
+                    const listItem = document.createElement('li');
+                    listItem.textContent = `${ingredient} - ${measure}`;
+                    ingredientsList.appendChild(listItem);
+                }
+            }
+
+            // Caso haja um link do YouTube
+            if (recipe.strYoutube) {
+                const youtubeLink = document.getElementById('recipe-video');
+                youtubeLink.href = recipe.strYoutube;
+                youtubeLink.textContent = 'Assista ao vídeo de preparo';
+            }
+        } else {
+            alert('Receita não encontrada!');
         }
-
-        // Renderizar os detalhes da receita
-        recipeDetailsContainer.innerHTML = `
-            <h1>${recipe.nome}</h1>
-            <img src="${recipe.imagem_url || 'path/to/default-image.jpg'}" alt="${recipe.nome}" class="recipe-image" />
-            <p><strong>Categoria:</strong> ${recipe.categoria || 'Sem categoria'}</p>
-            <h3>Descrição</h3>
-            <p>${recipe.descricao_preparacao}</p>
-            <h3>Ingredientes</h3>
-            <ul>
-                ${recipe.ingredientes.map(ing => `<li>${ing}</li>`).join('')}
-            </ul>
-        `;
     } catch (error) {
         console.error('Erro ao carregar os detalhes da receita:', error);
-        recipeDetailsContainer.innerHTML = '<p>Erro ao carregar a receita!</p>';
+        alert('Ocorreu um erro ao carregar os detalhes da receita. Tente novamente mais tarde.');
     }
 });
