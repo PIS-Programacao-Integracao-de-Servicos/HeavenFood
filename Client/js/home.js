@@ -59,6 +59,9 @@ document.addEventListener('DOMContentLoaded', async () => {
                 <p><strong>Categoria:</strong> ${recipe.categoria}</p>
             `;
             recipesGrid.appendChild(recipeCard);
+            recipeCard.addEventListener('click', () => {
+                window.location.href = `/recipes/details/${recipe.id}`;  // Redireciona para a página de detalhes
+            });
         });
     } catch (error) {
         console.error('Erro ao carregar receitas de destaque:', error);
