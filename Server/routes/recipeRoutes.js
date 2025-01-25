@@ -143,4 +143,55 @@ router.get('/all', async (req, res) => {
     }
 });
 
+// Rota para obter os detalhes de uma receita
+router.get('/details', async (req, res) => {
+    const recipeId = req.query.id;
+
+    if (!recipeId) {
+        return res.status(400).json({ message: 'ID da receita não fornecido.' });
+    }
+
+    try {
+        const query = `
+            SELECT 
+                Receita.id, 
+                Receita.nome, 
+                Receita.imagem_url, 
+                Receita.descricao_preparacao, 
+                RecipeCategories.nome AS categoria,
+                GROUP_CONCAT(Ingredientes.nome SEPARATOR ', ') AS ingredientes
+            FROM Receita
+            LEFT JOIN RecipeCategories ON Receita.categoria_id = RecipeCategories.id
+            LEFT JOIN ReceitaIngredientes ON Receita.id = ReceitaIngredientes.receita_id
+            LEFT JOIN Ingredientes ON ReceitaIngredientes.ingrediente_id = Ingredientes.id
+            WHERE Receita.id = ?
+            GROUP BY Receita.id
+        `;
+
+        const [result] = await new Promise((resolve, reject) => {
+            db.query(query, [recipeId], (err, results) => {
+                if (err) return reject(err);
+                resolve(results);
+            });
+        });
+
+        if (!result) {
+            return res.status(404).json({ message: 'Receita não encontrada.' });
+        }
+
+        res.status(200).json({
+            id: result.id,
+            nome: result.nome,
+            imagem_url: result.imagem_url,
+            descricao_preparacao: result.descricao_preparacao,
+            categoria: result.categoria,
+            ingredientes: result.ingredientes ? result.ingredientes.split(', ') : [],
+        });
+    } catch (error) {
+        console.error('Erro ao buscar detalhes da receita:', error.message);
+        res.status(500).json({ message: 'Erro ao buscar detalhes da receita.' });
+    }
+});
+
+
 module.exports = router;

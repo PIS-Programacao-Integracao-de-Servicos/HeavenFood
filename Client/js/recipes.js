@@ -2,11 +2,9 @@ document.addEventListener('DOMContentLoaded', async () => {
     const recipesGrid = document.querySelector('.recipes-grid');
 
     try {
-        // Use o novo endpoint da API
         const response = await fetch('/recipes/api/all');
         const recipes = await response.json();
 
-        const recipesGrid = document.querySelector('.recipes-grid');
         recipesGrid.innerHTML = ''; // Limpa o grid antes de adicionar receitas
 
         recipes.forEach(recipe => {
@@ -18,6 +16,12 @@ document.addEventListener('DOMContentLoaded', async () => {
                 <p><strong>Categoria:</strong> ${recipe.categoria || 'Sem categoria'}</p>
                 <p>${recipe.descricao_preparacao}</p>
             `;
+            
+            // Adicionar evento de clique para redirecionar para a página de detalhes
+            card.addEventListener('click', () => {
+                window.location.href = `/recipes/details.html?id=${recipe.id}`;
+            });
+
             recipesGrid.appendChild(card);
         });
     } catch (error) {
