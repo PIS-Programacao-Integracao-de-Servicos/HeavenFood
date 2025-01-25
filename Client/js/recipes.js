@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             });
 
             card.innerHTML = `
-                <img src="${recipe.imagem_url || 'path/to/default-image.jpg'}" alt="${recipe.nome}" class="recipe-image" />
+                <img src="${recipe.image_url || 'path/to/default-image.jpg'}" alt="${recipe.nome}" class="recipe-image" />
                 <h3>${recipe.nome}</h3>
                 <p><strong>Categoria:</strong> ${recipe.categoria || 'Sem categoria'}</p>
             `;

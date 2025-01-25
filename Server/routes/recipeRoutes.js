@@ -84,7 +84,7 @@ router.get('/highlight', async (req, res) => {
             nome: meal.strMeal,
             descricao_preparacao: meal.strInstructions,
             categoria: meal.strCategory,
-            imagem_url: `${meal.strMealThumb}/preview`,
+            image_url: `${meal.strMealThumb}/preview`,
         }));
 
         // Limitar a 3 receitas
@@ -129,7 +129,7 @@ router.get('/all', async (req, res) => {
             id: meal.idMeal,
             nome: meal.strMeal,
             categoria: meal.strCategory,
-            imagem_url: `${meal.strMealThumb}/preview`,
+            image_url: `${meal.strMealThumb}/preview`,
         }));
 
         const combinedRecipes = [...dbResults, ...formattedApiRecipes];
@@ -179,7 +179,7 @@ router.get('/details/:id', async (req, res) => {
         res.status(200).json({
             id: result.id,
             nome: result.nome,
-            imagem_url: result.imagem_url,
+            image_url: result.image_url,
             descricao_preparacao: result.descricao_preparacao,
             categoria: result.categoria,
             ingredientes: result.ingredientes ? result.ingredientes.split(', ') : [],
@@ -189,6 +189,29 @@ router.get('/details/:id', async (req, res) => {
         res.status(500).json({ message: 'Erro ao buscar detalhes da receita.' });
     }
 });
+
+router.post('/save', (req, res) => {
+    const { id, nome, image_url, categoria } = req.body;
+
+    if (!id || !nome) {
+        return res.status(400).json({ message: 'Dados insuficientes para salvar a receita.' });
+    }
+
+    const query = `
+        INSERT INTO Receita (id, nome, image_url, categoria)
+        VALUES (?, ?, ?, ?)
+        ON DUPLICATE KEY UPDATE nome = VALUES(nome), image_url = VALUES(image_url), categoria = VALUES(categoria)
+    `;
+
+    db.query(query, [id, nome, image_url, categoria], (err) => {
+        if (err) {
+            console.error('Erro ao salvar receita:', err);
+            return res.status(500).json({ message: 'Erro ao salvar receita na base de dados.' });
+        }
+        res.status(200).json({ message: 'Receita salva com sucesso!' });
+    });
+});
+
 
 
 
