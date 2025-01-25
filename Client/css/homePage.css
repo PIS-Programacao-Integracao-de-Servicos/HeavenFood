@@ -1,5 +1,3 @@
-
-
 main {
     background-color: var(--background-color);
     min-height: calc(100lvh - 20px - 2rem);
@@ -62,4 +60,25 @@ footer {
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 20px;
     padding: 20px;
+}
+
+#user-profile ul{
+    display: none;
+    position: absolute;
+    top: 3rem;
+}
+
+#user-profile ul li a{
+    list-style: none;
+    background-color: white;
+    color: black;
+    cursor: pointer;
+}
+
+#user-profile:hover > ul{
+    display: flex;
+}
+
+#user-profile{
+    position: relative;
 }
