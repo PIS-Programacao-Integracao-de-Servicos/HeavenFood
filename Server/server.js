@@ -51,3 +51,10 @@ app.get('/', (req, res) => {
 app.get('/aboutus', (req, res) => {
   res.sendFile((path.join(__dirname, '../Client/html/aboutus.html')));
 })
+
+// Rota para servir a página de detalhes da receita
+app.get('/recipes/details/:id', (req, res) => {
+  const recipeId = req.params.id;  // Pegue o ID da receita da URL
+  // Aqui você pode carregar os detalhes da receita a partir do banco de dados ou de uma API.
+  res.sendFile(path.join(__dirname, '../Client/html/recipe-details.html'));
+});
