@@ -14,7 +14,6 @@ document.addEventListener('DOMContentLoaded', async () => {
                 <img src="${recipe.imagem_url || 'path/to/default-image.jpg'}" alt="${recipe.nome}" class="recipe-image" />
                 <h3>${recipe.nome}</h3>
                 <p><strong>Categoria:</strong> ${recipe.categoria || 'Sem categoria'}</p>
-                <p>${recipe.descricao_preparacao}</p>
             `;
             recipesGrid.appendChild(card);
         });
