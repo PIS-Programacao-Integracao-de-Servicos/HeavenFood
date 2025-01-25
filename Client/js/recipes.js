@@ -1,13 +1,11 @@
 document.addEventListener('DOMContentLoaded', async () => {
-    const recipesGrid = document.querySelector('.recipes-grid');
 
     try {
-        // Use o novo endpoint da API
         const response = await fetch('/recipes/api/all');
         const recipes = await response.json();
 
         const recipesGrid = document.querySelector('.recipes-grid');
-        recipesGrid.innerHTML = ''; // Limpa o grid antes de adicionar receitas
+        recipesGrid.innerHTML = ''; 
 
         recipes.forEach(recipe => {
             const card = document.createElement('div');

@@ -12,9 +12,9 @@ router.get('/', async (req, res) => {
                 Receita.id, 
                 Receita.nome, 
                 Receita.descricao_preparacao, 
-                RecipeCategories.nome AS categoria 
+                Categorias.nome AS categoria 
             FROM Receita 
-            LEFT JOIN RecipeCategories ON Receita.categoria_id = RecipeCategories.id
+            LEFT JOIN Categorias ON Receita.categoria_id = Categorias.id
         `;
 
         const [dbResults] = await new Promise((resolve, reject) => {
@@ -56,11 +56,11 @@ router.get('/highlight', async (req, res) => {
         const query = `
             SELECT 
                 Receita.id, 
-                Receita.nome, 
+                Receita.nome,
                 Receita.descricao_preparacao, 
-                RecipeCategories.nome AS categoria 
+                Categorias.nome AS categoria 
             FROM Receita 
-            LEFT JOIN RecipeCategories ON Receita.categoria_id = RecipeCategories.id
+            LEFT JOIN Categorias ON Receita.categoria_id = Categorias.id
         `;
 
         const [dbResults] = await new Promise((resolve, reject) => {
@@ -102,12 +102,11 @@ router.get('/all', async (req, res) => {
         const query = `
             SELECT 
                 Receita.id,
-                Receita.imagem_url,
                 Receita.nome, 
                 Receita.descricao_preparacao, 
-                RecipeCategories.nome AS categoria 
+                Categorias.nome AS categoria 
             FROM Receita 
-            LEFT JOIN RecipeCategories ON Receita.categoria_id = RecipeCategories.id
+            LEFT JOIN Categorias ON Receita.categoria_id = Categorias.id
         `;
 
         const [dbResults] = await new Promise((resolve, reject) => {
