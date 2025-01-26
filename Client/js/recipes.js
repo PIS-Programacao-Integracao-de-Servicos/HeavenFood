@@ -1,6 +1,12 @@
+import { checkSession, updateAuthContainer } from './auth.js';
+
+
 document.addEventListener('DOMContentLoaded', async () => {
 
     try {
+        const sessionData = await checkSession();
+        updateAuthContainer(sessionData);
+
         const response = await fetch('/recipes/api/all');
         const recipes = await response.json();
 
@@ -27,3 +33,4 @@ document.addEventListener('DOMContentLoaded', async () => {
         console.error('Erro ao carregar receitas:', error);
     }
 });
+

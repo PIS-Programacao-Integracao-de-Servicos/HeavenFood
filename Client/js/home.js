@@ -10,9 +10,34 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         if (data.loggedIn) {
             console.log('Utilizador autenticado:', data.user.nome);
+            let dropdownContent = `
+                <li>
+                    <a href="/">Perfil</a>
+                </li>
+            `;
+        
+            if (data.user.isAdmin) {
+                console.log('Utilizador é admin.');
+                dropdownContent += `
+                    <li>
+                        <a href="/admin/dashboard" class="test">Dashboard</a>
+                    </li>
+                `;
+            }
+        
+            dropdownContent += `
+                <li>
+                    <a href="" id="logout-btn">Terminar sessão</a>
+                </li>
+            `;
+            const userImage = data.user.isAdmin ? '../assets/logo/male-user-admin.png' : '../assets/logo/male-user.png';
+
             authContainer.innerHTML = `
-                <span>Bem-vindo, ${data.user.nome}!</span>
-                <a href="" id="logout-btn" class="btn">Sair</a>
+                <li id="user-profile"><img src="${userImage}">
+                    <ul class="dropdown">
+                        ${dropdownContent}
+                    </ul>
+                </li>
             `;
 
             document.getElementById('logout-btn').addEventListener('click', async () => {
