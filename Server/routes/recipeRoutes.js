@@ -50,6 +50,8 @@ router.get('/highlight', async (req, res) => {
 
 // Rota para obter todas as receitas (usada na página de receitas)
 router.get('/all', async (req, res) => {
+    let dbResults = [];
+    let apiRecipes = [];
     try {
         const query = `
             SELECT 
@@ -61,31 +63,44 @@ router.get('/all', async (req, res) => {
             LEFT JOIN Categorias ON Receita.categoria_id = Categorias.id
         `;
 
-        const [dbResults] = await db.promise().query(query);
-
+        [dbResults] = await db.promise().query(query);
+    } catch (error) {
+        console.error('Erro ao acessar o banco de dados:', error.message);
+    }
+    try {
         const agent = new https.Agent({
             rejectUnauthorized: false,
         });
-        
+
         const apiResponse = await axios.get('https://www.themealdb.com/api/json/v1/1/search.php?s=', {
             httpsAgent: agent,
         });
-        const apiRecipes = apiResponse.data.meals || [];
+        apiRecipes = apiResponse.data.meals || [];
 
-        const formattedApiRecipes = apiRecipes.map((meal) => ({
-            id: meal.idMeal,
-            nome: meal.strMeal,
-            categoria: meal.strCategory,
-            image_url: meal.strMealThumb,
-        }));
-
-        const combinedRecipes = [...dbResults, ...formattedApiRecipes];
-
-        res.status(200).json(combinedRecipes);
     } catch (error) {
-        console.error('Erro ao buscar todas as receitas:', error.message);
-        res.status(500).json({ message: 'Erro ao buscar todas as receitas.' });
+        console.error('Erro ao buscar todas as receitas na API:', error.message);
     }
+
+    const formattedApiRecipes = apiRecipes.map((meal) => ({
+        id: parseInt(meal.idMeal),
+        nome: meal.strMeal,
+        categoria: meal.strCategory,
+        image_url: meal.strMealThumb,
+        source: 'api'
+    }));
+
+    const formattedDbResults = dbResults.map(recipe => ({
+        ...recipe,
+        id: recipe.id,
+        source: 'db'
+    }));
+
+    const combinedRecipes = [...formattedApiRecipes, ...formattedDbResults];
+    const uniqueRecipes = Array.from(new Map(combinedRecipes.map(recipe => [recipe.id, recipe])).values());
+
+    console.log(uniqueRecipes)
+    res.status(200).json(uniqueRecipes);
+
 });
 
 // Rota para obter os detalhes de uma receita
