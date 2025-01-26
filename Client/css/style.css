@@ -56,10 +56,18 @@ header {
     border-radius: 50%;
 }
 
+.logo-main{
+    width: 50%;
+    height: 50%;
+    padding: 0;
+    margin: 0;
+}
+
 .nav-links {
     list-style: none;
     display: flex;
     gap: var(--spacing); 
+    align-items: center;
 }
 
 .nav-links li {

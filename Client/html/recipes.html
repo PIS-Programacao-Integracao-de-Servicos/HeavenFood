@@ -4,9 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Todas as Receitas</title>
+    <title>Receitas</title>
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/homePage.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -14,16 +15,20 @@
         <nav class="navbar">
             <div class="logo">
                 <img src="../assets/logo/logo_without_background.png" alt="Food Heaven Logo" class="logo-image">
-                <div class="title">HeavenFood</div>
+                <a href="/" class="title">HeavenFood</a>
             </div>
+
             <ul class="nav-links">
-                <li><a href="/">Início</a></li>
                 <li><a href="/recipes">Receitas</a></li>
-                <li><a href="about.html">Sobre Nós</a></li>
-                <li><a href="contact.html">Contato</a></li>
+                <li><a href="/aboutus">Sobre Nós</a></li>
+                <li><a href="/">Contato</a></li>
+                <li id="auth-container">
+                    <a href="/auth/login" class="btn">Entrar/Registar</a>
+                </li>
             </ul>
         </nav>
     </header>
+
 
     <main>
         <h1 class="title featured-recipes">Todas as receitas</h1>
@@ -34,7 +39,7 @@
         <p>&copy; 2024 Food Heaven. Todos os direitos reservados.</p>
     </footer>
 
-    <script src="../js/recipes.js"></script>
+    <script type="module" src="./js/recipes.js"></script>
 </body>
 
 </html>

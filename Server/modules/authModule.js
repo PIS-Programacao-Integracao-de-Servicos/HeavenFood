@@ -1,22 +1,18 @@
 const bcrypt = require('bcryptjs');
 const db = require('../dbConnection');
 
-// Função para registo de novo utilizador
 const signup = async (req, res) => {
   const { nome, email, senha } = req.body;
 
   try {
-    // Verificar se o email já existe
     const [result] = await db.promise().query('SELECT * FROM Utilizadores WHERE email = ?', [email]);
 
     if (result.length > 0) {
       return res.status(400).json({ message: 'Email já registado!' });
     }
 
-    // Criar um hash para a senha
     const hashedPassword = await bcrypt.hash(senha, 10);
 
-    // Inserir o novo utilizador na base de dados
     await db.promise().query('INSERT INTO Utilizadores (nome, email, senha_hash) VALUES (?, ?, ?)', [nome, email, hashedPassword]);
 
     res.status(201).json({ message: 'Utilizador registado com sucesso!' });
@@ -26,7 +22,6 @@ const signup = async (req, res) => {
   }
 };
 
-// Função para autenticar e iniciar sessão
 const login = (req, res) => {
   try {
       console.log('Método:', req.method);
@@ -56,7 +51,7 @@ const login = (req, res) => {
               return res.status(400).json({ message: 'E-mail ou senha inválidos!' });
           }
 
-          req.session.user = { id: user.id, nome: user.nome };
+          req.session.user = { id: user.id, nome: user.nome, isAdmin: user.administrador }; 
           return res.status(200).json({ message: 'Login bem-sucedido!', user: req.session.user });
       });
   } catch (error) {

@@ -62,17 +62,13 @@ footer {
     padding: 20px;
 }
 
-#user-profile ul{
-    display: none;
-    position: absolute;
-    top: 3rem;
-}
+
 
 #user-profile ul li a{
     list-style: none;
-    background-color: white;
     color: black;
     cursor: pointer;
+    text-wrap: nowrap;
 }
 
 #user-profile:hover > ul{
@@ -80,5 +76,30 @@ footer {
 }
 
 #user-profile{
-    position: relative;
+    position: relative;    
+}
+
+.dropdown{
+    display: none;
+    position: absolute;
+    background-color: white;
+    font-size: 1px;
+    right: -15px;
+    flex-direction: column;
+    margin-top: -4px;
+    margin-right: -4px;
+}
+
+.dropdown li a:hover{
+    background-color: var(--detail-color);
+}
+
+.dropdown li a{
+    width: 100%;
+    display: flex;
+}
+
+.dropdown li{
+    width: 100%;
+    display: flex;
 }
