@@ -48,3 +48,12 @@ CREATE TABLE Utilizadores (
     senha_hash VARCHAR(255),
     administrador BOOLEAN DEFAULT FALSE
 );
+
+-- Tabela de Favoritos
+CREATE TABLE Favoritos (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    utilizador_id INT,
+    receita_id INT,
+    FOREIGN KEY (utilizador_id) REFERENCES Utilizadores(id) ON DELETE CASCADE,
+    FOREIGN KEY (receita_id) REFERENCES Receita(id) ON DELETE CASCADE
+);
