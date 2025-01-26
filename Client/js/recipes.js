@@ -17,13 +17,15 @@ document.addEventListener('DOMContentLoaded', async () => {
             const card = document.createElement('div');
             card.className = 'recipe-card';
             
+            console.log(recipe.image_url);
+
             // Adiciona um clique ao card para redirecionar para a página de detalhes
             card.addEventListener('click', () => {
                 window.location.href = `/recipes/details/${recipe.id}`;  // Redireciona para a página de detalhes
             });
 
             card.innerHTML = `
-                <img src="${recipe.imagem_url || 'path/to/default-image.jpg'}" alt="${recipe.nome}" class="recipe-image" />
+                <img src="${recipe.image_url}" alt="${recipe.nome}" class="recipe-image" />
                 <h3>${recipe.nome}</h3>
                 <p><strong>Categoria:</strong> ${recipe.categoria || 'Sem categoria'}</p>
             `;

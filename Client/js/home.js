@@ -79,7 +79,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             const recipeCard = document.createElement('div');
             recipeCard.classList.add('recipe-card');
             recipeCard.innerHTML = `
-                <img src="${recipe.imagem_url || 'path/to/default-image.jpg'}" alt="${recipe.nome}" class="recipe-image" />
+                <img src="${recipe.image_url}" alt="${recipe.nome}" class="recipe-image" />
                 <h3 class="title">${recipe.nome}</h3>
                 <p><strong>Categoria:</strong> ${recipe.categoria}</p>
             `;

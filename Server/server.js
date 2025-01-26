@@ -7,6 +7,7 @@ const app = express();
 const port = 3000;
 const recipeRoutes = require('./routes/recipeRoutes');
 const aboutRoutes = require('./routes/aboutRoutes');
+const importRecipeRoutes = require('./routes/importRecipeRoutes');
 
 
 app.use(cors({ origin: 'http://localhost:8081', credentials: true }));
@@ -32,9 +33,7 @@ app.use('/recipes/api', recipeRoutes);
 
 app.use('/api', aboutRoutes); 
 
-app.listen(port, () => {
-  console.log(`Servidor rodando na porta ${port}`);
-});
+app.use('/recipes', importRecipeRoutes);
 
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '../Client/html/index.html'));
@@ -57,4 +56,13 @@ app.get('/recipes/details/:id', (req, res) => {
   const recipeId = req.params.id;  // Pegue o ID da receita da URL
   // Aqui você pode carregar os detalhes da receita a partir do banco de dados ou de uma API.
   res.sendFile(path.join(__dirname, '../Client/html/recipe-details.html'));
+});
+
+// Rota para servir a página de importar receitas
+app.get('/admin', (req, res) => {
+  res.sendFile(path.join(__dirname, '../Client/html/admin.html'));
+});
+
+app.listen(port, () => {
+  console.log(`Servidor rodando na porta ${port}`);
 });
