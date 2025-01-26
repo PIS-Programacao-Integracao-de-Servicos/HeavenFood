@@ -16,6 +16,12 @@ document.addEventListener('DOMContentLoaded', async () => {
         recipes.forEach(recipe => {
             const card = document.createElement('div');
             card.className = 'recipe-card';
+            
+            // Adiciona um clique ao card para redirecionar para a página de detalhes
+            card.addEventListener('click', () => {
+                window.location.href = `/recipes/details/${recipe.id}`;  // Redireciona para a página de detalhes
+            });
+
             card.innerHTML = `
                 <img src="${recipe.imagem_url || 'path/to/default-image.jpg'}" alt="${recipe.nome}" class="recipe-image" />
                 <h3>${recipe.nome}</h3>
