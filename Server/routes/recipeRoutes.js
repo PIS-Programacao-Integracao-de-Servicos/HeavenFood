@@ -73,15 +73,25 @@ router.get('/all', async (req, res) => {
         const apiRecipes = apiResponse.data.meals || [];
 
         const formattedApiRecipes = apiRecipes.map((meal) => ({
-            id: meal.idMeal,
+            id: parseInt(meal.idMeal),
             nome: meal.strMeal,
             categoria: meal.strCategory,
             image_url: meal.strMealThumb,
+            source: 'api'
         }));
 
-        const combinedRecipes = [...dbResults, ...formattedApiRecipes];
+        const formattedDbResults = dbResults.map(recipe => ({
+            ...recipe,
+            id: recipe.id,
+            source: 'db'
+        }));
 
-        res.status(200).json(combinedRecipes);
+        const combinedRecipes = [...formattedApiRecipes, ...formattedDbResults];
+        const uniqueRecipes = Array.from(new Map(combinedRecipes.map(recipe => [recipe.id, recipe])).values());
+
+        console.log(uniqueRecipes)
+
+        res.status(200).json(uniqueRecipes);
     } catch (error) {
         console.error('Erro ao buscar todas as receitas:', error.message);
         res.status(500).json({ message: 'Erro ao buscar todas as receitas.' });
