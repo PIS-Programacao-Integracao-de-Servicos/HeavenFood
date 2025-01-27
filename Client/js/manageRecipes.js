@@ -17,7 +17,6 @@ document.addEventListener('DOMContentLoaded', async () => {
             <td>${recipe.tempo || 'desconhecido'}</td>
             <td>${recipe.custo || 'desconhecido'}</td>
             <td>
-                <button class="btn btn-primary btn-sm" onclick="openModal(${recipe.id})">Editar</button>
                 <button class="btn btn-danger btn-sm" onclick ="deleteRecipe(${recipe.id})">Remover</button>
             </td>
             
