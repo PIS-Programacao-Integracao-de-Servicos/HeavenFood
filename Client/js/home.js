@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             console.log('Utilizador autenticado:', data.user.nome);
             let dropdownContent = `
                 <li>
-                    <a href="/">Perfil</a>
+                    <a href="/profile">Perfil</a>       
                 </li>
             `;
         
