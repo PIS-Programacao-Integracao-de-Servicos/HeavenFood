@@ -1,5 +1,5 @@
 const bcrypt = require('bcryptjs');
-const db = require('../dbConnection');
+const db = require('../config/dbConnection');
 
 const signup = async (req, res) => {
   const { nome, email, senha } = req.body;

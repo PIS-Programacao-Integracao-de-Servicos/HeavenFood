@@ -26,8 +26,7 @@ CREATE TABLE Receita (
 -- Tabela de Ingredientes
 CREATE TABLE Ingrediente (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    nome VARCHAR(255) NOT NULL,
-    descricao TEXT
+    nome VARCHAR(255) NOT NULL
 );
 
 -- Tabela de relação entre Receitas e Ingredientes
@@ -57,3 +56,5 @@ CREATE TABLE Favoritos (
     FOREIGN KEY (utilizador_id) REFERENCES Utilizadores(id) ON DELETE CASCADE,
     FOREIGN KEY (receita_id) REFERENCES Receita(id) ON DELETE CASCADE
 );
+
+INSERT INTO Utilizadores (nome, email, senha_hash, administrador) VALUES ('admin', 'admin@hf.com','123', TRUE);
