@@ -130,7 +130,8 @@ O ficheiro `manageRecipes.js` é responsável por gerenciar a exibição, adiç�
 Quando a página é carregada, o código faz uma requisição à API para obter todas as receitas com detalhes e as exibe em uma tabela.
 
 **_Obs:_**
-**Os Métodos PUT e POST estão funcionais apenas no BackEnd através dos endpoints, não existindo uma forma de fazer a edição ou adição de receitas através do front-end
+**Os Métodos PUT e POST estão funcionais apenas no BackEnd através dos endpoints, não existindo uma forma de fazer a edição ou adição de receitas através do front-end**
+
 Licença
 Este projeto está licenciado sob a licença MIT. Veja o ficheiro LICENSE para mais detalhes.
 
