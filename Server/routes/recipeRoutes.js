@@ -4,5 +4,9 @@ const router = express.Router();
 
 router.get('/highlight', recipeController.getRecipes);
 router.get('/all', recipeController.getAllRecipes);
+router.get('/search/:nome', recipeController.getRecipeByName);
+router.get('/categories', recipeController.getAllCategories);
+router.get('/categories/:id', recipeController.getRecipeByCategoryId);
+
 
 module.exports = router;

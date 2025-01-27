@@ -30,7 +30,6 @@ app.get('/profile', (req, res) => {
   res.sendFile(path.join(__dirname, '../Client/html/profile.html'));
 });
 
-
 app.get('/recipes', (req, res) => {
   res.sendFile(path.join(__dirname, '../Client/html/recipes.html'));
 });
@@ -40,6 +39,7 @@ app.use('/recipes/api', recipeRoutes);
 // app.use('/api', aboutRoutes); 
 app.use('/import', importRecipeRoutes);
 app.use('/favorites', favoriteRoutes);
+
 
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../Client/html/index.html'));
