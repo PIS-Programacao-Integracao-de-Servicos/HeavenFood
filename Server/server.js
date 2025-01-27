@@ -24,6 +24,13 @@ app.use(session({
   saveUninitialized: true
 }));
 
+app.use('/auth', authRoutes);
+
+app.get('/profile', (req, res) => {
+  res.sendFile(path.join(__dirname, '../Client/html/profile.html'));
+});
+
+
 app.get('/recipes', (req, res) => {
   res.sendFile(path.join(__dirname, '../Client/html/recipes.html'));
 });
