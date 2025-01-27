@@ -49,7 +49,6 @@ const getAllRecipes = async () => {
         console.error('Erro ao buscar todas as receitas na API:', error.message);
     }
 
-    
     const formattedApiRecipes = apiRecipes.map((meal) => ({
         id: parseInt(meal.idMeal),
         nome: meal.strMeal,
