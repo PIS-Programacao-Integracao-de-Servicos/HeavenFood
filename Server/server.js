@@ -5,7 +5,6 @@ const path = require('path');
 
 const authRoutes = require('./routes/authRoutes');
 const recipeRoutes = require('./routes/recipeRoutes');
-// const aboutRoutes = require('./routes/aboutRoutes');
 const importRecipeRoutes = require('./routes/importRecipeRoutes');
 const favoriteRoutes = require('./routes/favoriteRoutes');
 
@@ -34,9 +33,8 @@ app.get('/recipes', (req, res) => {
   res.sendFile(path.join(__dirname, '../Client/html/recipes.html'));
 });
 
-
 app.use('/recipes/api', recipeRoutes);
-// app.use('/api', aboutRoutes); 
+
 app.use('/import', importRecipeRoutes);
 app.use('/favorites', favoriteRoutes);
 
@@ -47,11 +45,6 @@ app.get('/recipes/details/:id', (req, res) => {
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../Client/html/index.html'));
 });
-
-
-// app.get('/admin', (req, res) => {
-//   res.sendFile(path.join(__dirname, '../Client/html/admin.html'));
-// });
 
 app.listen(port, () => {
   console.log(`Servidor rodando na porta ${port}`);
