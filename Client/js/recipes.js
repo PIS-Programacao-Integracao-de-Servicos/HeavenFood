@@ -29,19 +29,19 @@ document.addEventListener('DOMContentLoaded', async () => {
             });
 
             const isFavorite = favoriteIds.includes(recipe.id);
-            const starImage = isFavorite ? '/assets/logo/full-heart.png' : '/assets/logo/empty-heart.png';
+            const starImage = isFavorite ? '/assets/full-heart.png' : '/assets/empty-heart.png';
 
             card.innerHTML = `
                 <img src="${recipe.image_url}" alt="${recipe.nome}" class="recipe-image" />
                 <h3>${recipe.nome}</h3>
                 <p><strong>Categoria:</strong> ${recipe.categoria || 'Sem categoria'}</p>
-                ${userId ? `<img src="${starImage}" alt="Adicionar aos Favoritos" class="favorite-star" data-id="${recipe.id}" />` : ''}
+                ${userId ? `<img src="${starImage}" alt="Adicionar aos Favoritos" class="favorite-heart" data-id="${recipe.id}" />` : ''}
             `;
             recipesGrid.appendChild(card);
         });
 
         if (userId) {
-            document.querySelectorAll('.favorite-star').forEach(star => {
+            document.querySelectorAll('.favorite-heart').forEach(star => {
                 star.addEventListener('click', async (event) => {
                     event.stopPropagation();
                     const recipeId = event.target.getAttribute('data-id');
@@ -59,7 +59,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
                             const result = await response.json();
                             if (response.ok) {
-                                event.target.src = '/assets/logo/empty-heart.png'; 
+                                event.target.src = '/assets/empty-heart.png'; 
                             } else {
                                 alert('Erro ao remover dos favoritos: ' + result.message);
                             }
@@ -74,7 +74,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
                             const result = await response.json();
                             if (response.ok) {
-                                event.target.src = '/assets/logo/full-heart.png'; 
+                                event.target.src = '/assets/full-heart.png'; 
                             } else {
                                 alert('Erro ao adicionar aos favoritos: ' + result.message);
                             }

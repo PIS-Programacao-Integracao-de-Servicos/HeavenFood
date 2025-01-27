@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                     <a href="" id="logout-btn">Terminar sessão</a>
                 </li>
             `;
-            const userImage = data.user.isAdmin ? '../assets/logo/male-user-admin.png' : '../assets/logo/male-user.png';
+            const userImage = data.user.isAdmin ? '../assets/male-user-admin.png' : '../assets/male-user.png';
 
             authContainer.innerHTML = `
                 <li id="user-profile"><img src="${userImage}">
