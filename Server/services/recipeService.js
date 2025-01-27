@@ -72,7 +72,6 @@ const getAllRecipes = async () => {
 const getRecipeById = async (id) => {
     try {
         const dbRecipe = await recipeModel.getRecipeById(id);
-        console.log('DB Recipe:', dbRecipe);
 
         const agent = new https.Agent({
             rejectUnauthorized: false,
@@ -82,7 +81,6 @@ const getRecipeById = async (id) => {
             httpsAgent: agent,
         });
         const apiRecipe = apiResponse.data.meals ? apiResponse.data.meals[0] : null;
-        console.log('API Recipe:', apiRecipe);
 
         if (apiRecipe) {
             const ingredientes = dbRecipe.ingredientes.map(ingredient => ({
