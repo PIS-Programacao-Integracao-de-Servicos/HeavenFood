@@ -69,7 +69,50 @@ const getAllRecipes = async () => {
     return uniqueRecipes;
 };
 
+const getRecipeById = async (id) => {
+    try {
+        const dbRecipe = await recipeModel.getRecipeById(id);
+        console.log('DB Recipe:', dbRecipe);
+
+        const agent = new https.Agent({
+            rejectUnauthorized: false,
+        });
+
+        const apiResponse = await axios.get(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`, {
+            httpsAgent: agent,
+        });
+        const apiRecipe = apiResponse.data.meals ? apiResponse.data.meals[0] : null;
+        console.log('API Recipe:', apiRecipe);
+
+        if (apiRecipe) {
+            const ingredientes = dbRecipe.ingredientes.map(ingredient => ({
+                ...ingredient,
+                image_url: `https://www.themealdb.com/images/ingredients/${ingredient.ingrediente}-Small.png`
+            }));
+
+            return {
+                ...dbRecipe,
+                youtube_link: apiRecipe.strYoutube,
+                localidade: apiRecipe.strArea,
+                ingredientes
+            };
+        }
+
+        return {
+            ...dbRecipe,
+            ingredientes: dbRecipe.ingredientes.map(ingredient => ({
+                ...ingredient,
+                image_url: `https://www.themealdb.com/images/ingredients/${ingredient.ingrediente}-Small.png`
+            }))
+        };
+    } catch (error) {
+        console.error('Erro ao buscar detalhes da receita:', error);
+        throw error;
+    }
+};
+
 module.exports = {
     getRecipes,
     getAllRecipes,
+    getRecipeById,
 };
