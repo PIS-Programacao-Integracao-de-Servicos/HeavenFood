@@ -73,13 +73,16 @@ const deleteRecipe = async (req, res) => {
 
 const getAllRecipesWithDetails = async (req, res) => {
     try {
-        const recipes = await recipeService.getAllRecipesWithDetails();
+        const recipes = await recipeModel.getAllRecipesWithDetails();
+        console.log(recipes)
         res.status(200).json(recipes);
+        
     } catch (error) {
         console.error('Erro ao buscar todas as receitas com detalhes:', error.message);
         res.status(500).json({ message: 'Erro ao buscar todas as receitas com detalhes.' });
     }
-    console.log('getAllRecipesWithDetails - recipes:', recipes);
+    
+    // console.log('getAllRecipesWithDetails - recipes:', recipes);
 
 };
 
@@ -121,9 +124,9 @@ module.exports = {
     getRecipeByName,
     getAllCategories,
     getRecipeByCategoryId,
-    getRecipeById
+    getRecipeById,
     addRecipe,
     updateRecipe,
     deleteRecipe,
-    getAllRecipesWithDetails,
+    getAllRecipesWithDetails
 };

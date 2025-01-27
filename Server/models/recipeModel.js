@@ -71,7 +71,8 @@ const deleteRecipe = async (id) => {
 };
 
 const getAllRecipesWithDetails = async () => {
-    const [rows] = await db.promise().query('SELECT id, nome, descricao_preparacao, categoria_id, image_url, autor, dificuldade, tempo, custo FROM Receita');
+    const query = "SELECT * FROM receita";
+    const [rows] = await db.promise().query(query);
 
     return rows;
     
@@ -116,9 +117,9 @@ module.exports = {
     getRecipeById,
     getAllRecipes,
     getAllCategories,
-    getRecipeByCategoryId
+    getRecipeByCategoryId,
     insertRecipe,
     updateRecipe,
     deleteRecipe,
-    getAllRecipesWithDetails,
+    getAllRecipesWithDetails
 };
