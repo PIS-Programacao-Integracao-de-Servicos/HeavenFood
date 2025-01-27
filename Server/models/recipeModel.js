@@ -50,6 +50,34 @@ const getRecipeById = async (id) => {
     };
 };
 
+const insertRecipe = async (recipe) => {
+    const { nome, descricao_preparacao, categoria_id, image_url, autor, dificuldade, tempo, custo } = recipe;
+    await db.promise().query(
+        'INSERT INTO Receita (nome, descricao_preparacao, categoria_id, image_url, autor, dificuldade, tempo, custo) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
+        [nome, descricao_preparacao, categoria_id, image_url, autor, dificuldade, tempo, custo]
+    );
+};
+
+const updateRecipe = async (id, recipe) => {
+    const { nome, descricao_preparacao, categoria_id, image_url, autor, dificuldade, tempo, custo } = recipe;
+    await db.promise().query(
+        'UPDATE Receita SET nome = ?, descricao_preparacao = ?, categoria_id = ?, image_url = ?, autor = ?, dificuldade = ?, tempo = ?, custo = ? WHERE id = ?',
+        [nome, descricao_preparacao, categoria_id, image_url, autor, dificuldade, tempo, custo, id]
+    );
+};
+
+const deleteRecipe = async (id) => {
+    await db.promise().query('DELETE FROM Receita WHERE id = ?', [id]);
+};
+
+const getAllRecipesWithDetails = async () => {
+    const query = "SELECT * FROM receita";
+    const [rows] = await db.promise().query(query);
+
+    return rows;
+    
+};
+
 const getAllCategories = async () => {
     let results = [];
     try {
@@ -89,5 +117,9 @@ module.exports = {
     getRecipeById,
     getAllRecipes,
     getAllCategories,
-    getRecipeByCategoryId
+    getRecipeByCategoryId,
+    insertRecipe,
+    updateRecipe,
+    deleteRecipe,
+    getAllRecipesWithDetails
 };

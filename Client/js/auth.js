@@ -24,7 +24,7 @@ export function updateAuthContainer(data) {
             console.log('Utilizador é admin.');
             dropdownContent += `
                 <li>
-                    <a href="/admin/dashboard" class="test">Dashboard</a>
+                    <a href="/html/dashboard.html" class="test">Dashboard</a>
                 </li>
             `;
         }

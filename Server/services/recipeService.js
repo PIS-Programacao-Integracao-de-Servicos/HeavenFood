@@ -73,7 +73,6 @@ const getAllRecipes = async () => {
 const getRecipeById = async (id) => {
     try {
         const dbRecipe = await recipeModel.getRecipeById(id);
-        console.log('DB Recipe:', dbRecipe);
 
         const agent = new https.Agent({
             rejectUnauthorized: false,
@@ -83,7 +82,6 @@ const getRecipeById = async (id) => {
             httpsAgent: agent,
         });
         const apiRecipe = apiResponse.data.meals ? apiResponse.data.meals[0] : null;
-        console.log('API Recipe:', apiRecipe);
 
         if (apiRecipe) {
             const ingredientes = dbRecipe.ingredientes.map(ingredient => ({
@@ -142,9 +140,31 @@ const getRecipeByName = async (name) => {
 
 
 
+const addRecipe = async (recipeData) => {
+    await recipeModel.insertRecipe(recipeData);
+};
+
+const updateRecipe = async (id, recipeData) => {
+    await recipeModel.updateRecipe(id, recipeData);
+};
+
+const deleteRecipe = async (id) => {
+    await recipeModel.deleteRecipe(id);
+};
+
+const getAllRecipesWithDetails = async () => {
+    const recipes = await recipeModel.getAllRecipesWithDetails();
+    console.log('getAllRecipesWithDetails - recipes:', recipes);
+    return recipes;
+};
+
 module.exports = {
     getRecipes,
     getAllRecipes,
     getRecipeById,
     getRecipeByName,
+    addRecipe,
+    updateRecipe,
+    deleteRecipe,
+    getAllRecipesWithDetails,
 };
