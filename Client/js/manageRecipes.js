@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             <td>${recipe.tempo || 'desconhecido'}</td>
             <td>${recipe.custo || 'desconhecido'}</td>
             <td>
-                <button class="btn btn-primary btn-sm" onclick = "editRecipe(${recipe.id}">Editar</button>
+                <button class="btn btn-primary btn-sm" onclick="openModal(${recipe.id})">Editar</button>
                 <button class="btn btn-danger btn-sm" onclick ="deleteRecipe(${recipe.id})">Remover</button>
             </td>
             
@@ -39,26 +39,5 @@ async function deleteRecipe(id) {
     } catch (error) {
         console.error('Erro ao remover receita:', error);
         alert('Erro ao remover receita.');
-    }
-}
-
-async function editRecipe(id) {
-    try {
-        const response = await fetch(`/recipes/update/${id}`, {
-            method: 'PATCH',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ name, category, area, image, instructions })
-        })
- 
-        if (!response.ok) {
-            throw new Error('Failed to update recipe')
-        }
- 
-        console.log('Recipe updated successfully')
-        window.location.reload()
-    } catch (error) {
-        console.error('Error updating recipe:', error)
     }
 }
