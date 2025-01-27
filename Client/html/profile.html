@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil do Utilizador</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/homePage.css">
+    <link rel="stylesheet" href="../css/profile.css">
+</head>
+<body>
+        <header>
+            <nav class="navbar">
+                <div class ="logo">
+                    <img src="../assets/logo_without_background.png" alt="Food Heaven Logo" class="logo-image">
+                    <a href="/" class="title">HeavenFood</a>
+                </div>
+                
+                <ul class="nav-links">
+                    <li><a href="/recipes">Receitas</a></li>
+                    <li><a href="/aboutus">Sobre Nós</a></li>
+                    <li><a href="/">Contato</a></li>
+                    <li id="auth-container">
+                        <a href="/auth/login" class="btn">Entrar/Registar</a>
+                    </li>
+                </ul>
+            </nav>
+        </header>
+    <main>
+        <img src="../assets/male-user.png" alt="profile picture" class="avatar">
+        <section class="profile-info">
+            <p><strong>Nome:</strong> <span id="user-name"></span></p>
+            <p><strong>Email:</strong> <span id="user-email"></span></p>
+        </section>
+        <section class="favorite-recipes">
+            <h2>Receitas Favoritadas</h2>
+            <div id="favorites-grid" class="favorites-grid">
+                <h2>Receitas Favoritadas</h2>
+                <!-- Receitas favoritadas serão carregadas aqui -->
+            </div>
+        </section>
+    </main>
+
+    <script type="module" src="../js/profile.js"></script>
+</body>
+</html>

@@ -24,8 +24,12 @@ app.use(session({
   saveUninitialized: true
 }));
 
-
 app.use('/auth', authRoutes);
+
+app.get('/profile', (req, res) => {
+  res.sendFile(path.join(__dirname, '../Client/html/profile.html'));
+});
+
 app.use('/recipes/api', recipeRoutes);
 // app.use('/api', aboutRoutes); 
 app.use('/import', importRecipeRoutes);
@@ -35,14 +39,13 @@ app.get('/recipes', (req, res) => {
   res.sendFile(path.join(__dirname, '../Client/html/recipes.html'));
 }); 
 
-app.get('/recipes/details/:id', (req, res) => {
+app.get('/details/:id', (req, res) => {
   res.sendFile(path.join(__dirname, '../Client/html/recipe-details.html'));
 });
 
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../Client/html/index.html'));
 });
-
 
 // app.get('/admin', (req, res) => {
 //   res.sendFile(path.join(__dirname, '../Client/html/admin.html'));
