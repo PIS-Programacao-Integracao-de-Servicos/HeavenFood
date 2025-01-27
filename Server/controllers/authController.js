@@ -17,7 +17,7 @@ const login = async (req, res) => {
 
     try {
         const user = await authService.login(email, senha);
-        req.session.user = { id: user.id, nome: user.nome, isAdmin: user.administrador };
+        req.session.user = { id: user.id, nome: user.nome, isAdmin: user.administrador, email: user.email };
         res.status(200).json({ message: 'Login efetuado com sucesso!', user });
     } catch (error) {
         console.error('Erro ao efetuar login:', error.message);

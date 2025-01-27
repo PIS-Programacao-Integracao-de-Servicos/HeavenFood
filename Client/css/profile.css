@@ -1,0 +1,47 @@
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: auto;
+    padding: 20px;
+}
+.avatar {
+    width: 20%;
+}
+.profile-info {
+    display: block;
+    text-align: center;
+    padding: 20px;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.favorites-grid {
+    display: grid;
+    padding: 0 2rem;
+    grid-template-columns: repeat(auto-fit, 250px);
+    gap: var(--spacing);
+    width: 100vw;
+    margin: 0 -2rem;
+    justify-content: center;
+}
+
+.favorite-recipes h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.recipe-card {
+    background-color: var(--detail-color); 
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    position: relative;
+}
+
+.recipe-card img:nth-child(1) {
+    width: 100%;
+    border-radius: 10px;
+}
+
