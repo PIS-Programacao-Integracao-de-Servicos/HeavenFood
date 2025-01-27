@@ -56,5 +56,3 @@ CREATE TABLE Favoritos (
     FOREIGN KEY (utilizador_id) REFERENCES Utilizadores(id) ON DELETE CASCADE,
     FOREIGN KEY (receita_id) REFERENCES Receita(id) ON DELETE CASCADE
 );
-
-INSERT INTO Utilizadores (nome, email, senha_hash, administrador) VALUES ('admin', 'admin@hf.com','123', TRUE);
