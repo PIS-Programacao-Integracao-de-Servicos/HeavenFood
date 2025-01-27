@@ -1,6 +1,12 @@
-document.addEventListener('DOMContentLoaded', async () => {
-    const recipeId = window.location.pathname.split('/').pop();
+import { checkSession, updateAuthContainer } from './auth.js';
 
+document.addEventListener('DOMContentLoaded', async () => {
+    
+    const recipeId = window.location.pathname.split('/').pop();
+            const sessionData = await checkSession();
+            updateAuthContainer(sessionData);
+    
+            console.log(sessionData)
     if (!recipeId) {
         alert('ID da receita não fornecido.');
         return;
