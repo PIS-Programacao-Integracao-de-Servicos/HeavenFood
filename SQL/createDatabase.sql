@@ -26,8 +26,7 @@ CREATE TABLE Receita (
 -- Tabela de Ingredientes
 CREATE TABLE Ingrediente (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    nome VARCHAR(255) NOT NULL,
-    descricao TEXT
+    nome VARCHAR(255) NOT NULL
 );
 
 -- Tabela de relação entre Receitas e Ingredientes
