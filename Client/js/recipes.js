@@ -1,5 +1,6 @@
 import { checkSession, updateAuthContainer } from './auth.js';
 
+
 document.addEventListener('DOMContentLoaded', async () => {
     try {
         const sessionData = await checkSession();
@@ -25,7 +26,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             card.className = 'recipe-card';
             
             card.addEventListener('click', () => {
-                window.location.href = `/recipes/details/${recipe.id}`;
+                window.location.href = `/recipes/details/${recipe.id}`; 
             });
 
             const isFavorite = favoriteIds.includes(recipe.id);
