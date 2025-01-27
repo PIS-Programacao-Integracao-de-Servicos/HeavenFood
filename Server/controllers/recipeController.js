@@ -21,6 +21,25 @@ const getAllRecipes = async (req, res) => {
     }
 };
 
+
+
+const getRecipeById = async (req, res) => {
+    const { id } = req.params;
+
+    try {
+        const recipe = await recipeService.getRecipeById(id);
+        if (recipe) {
+            res.status(200).json(recipe);
+        } else {
+            res.status(404).json({ message: 'Receita não encontrada.' });
+        }
+    } catch (error) {
+        console.error('Erro ao buscar detalhes da receita:', error.message);
+        res.status(500).json({ message: 'Erro ao buscar detalhes da receita.' });
+    }
+};
+
+
 const getRecipeByName = async (req, res) => {
     try {
         const { nome } = req.params;
@@ -57,5 +76,6 @@ module.exports = {
     getAllRecipes,
     getRecipeByName,
     getAllCategories,
-    getRecipeByCategoryId
+    getRecipeByCategoryId,
+    getRecipeById
 };
