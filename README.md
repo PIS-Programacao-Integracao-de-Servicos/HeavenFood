@@ -28,7 +28,7 @@ Este projeto utiliza a API externa [The Meal DB](https://www.themealdb.com/api.p
 1. Clone o repositório:
 
 ```sh
-git clone https://github.com/seu-usuario/heavenfood.git
+git clone https://github.com/seu-utilizador/heavenfood.git
 
 ```
 2. Navegue até o diretório do projeto:
@@ -46,7 +46,7 @@ npm install
 
 5. Acesse o diretório do servidor:
 ```
-   cd heavenfood
+   cd .\services\
 ```
 6. Inicie o Servidor
  ```  
@@ -54,19 +54,19 @@ node server.js
 ```
 ## Estrutura de Diretórios
 ### Client
-* `assets/`: Contém imagens e outros arquivos estáticos.
-* `css/`: Contém arquivos CSS para estilização das páginas.
-* `html/`: Contém arquivos HTML para as páginas da aplicação.
-* `js/`: Contém arquivos JavaScript para a lógica do lado do cliente.
+* `assets/`: Contém imagens e outros ficheiros estáticos.
+* `css/`: Contém ficheiros CSS para estilização das páginas.
+* `html/`: Contém ficheiros HTML para as páginas da aplicação.
+* `js/`: Contém ficheiros JavaScript para a lógica do lado do cliente.
 
 ### Server
 
-* `config/`: Contém arquivos de configuração, como a conexão com o banco de dados.
+* `config/`: Contém ficheiros de configuração, como a conexão com o banco de dados.
 * `controllers/`: Contém os controladores que lidam com as requisições HTTP.
 * `models/`: Contém os modelos que interagem com o banco de dados.
 * `routes/`: Contém as definições de rotas da aplicação.
 * `services/`: Contém a lógica de negócios da aplicação.
-* `\server.js`: Arquivo principal do servidor Express.
+* `\server.js`: ficheiro principal do servidor Express.
 
 ### SQL
 * `\SQL\createDatabase.sql`: Script SQL para criar e configurar a base de dados.
@@ -111,8 +111,29 @@ node server.js
 ### Importação de Receitas
 * `GET /import/data`: Importação de receitas da API externa.
 
+### Dashboard Admin
+# manageRecipes.js
+
+O ficheiro `manageRecipes.js` é responsável por gerenciar a exibição, adição, atualização e remoção de receitas na página de administração de receitas. Ele faz requisições à API para obter os dados das receitas e manipula o DOM para exibir essas informações em uma tabela.
+
+## Funcionalidades
+
+- Listar todas as receitas com detalhes.
+- Adicionar uma nova receita.
+- Atualizar uma receita existente.
+- Remover uma receita.
+
+## Estrutura do Código
+
+### Listar Receitas
+
+Quando a página é carregada, o código faz uma requisição à API para obter todas as receitas com detalhes e as exibe em uma tabela.
+
+**_Obs:_**
+**Os Métodos PUT e POST estão funcionais apenas no BackEnd através dos endpoints, não existindo uma forma de fazer a edição ou adição de receitas através do front-end**
+
 Licença
-Este projeto está licenciado sob a licença MIT. Veja o arquivo LICENSE para mais detalhes.
+Este projeto está licenciado sob a licença MIT. Veja o ficheiro LICENSE para mais detalhes.
 
 
 ## Autores:
