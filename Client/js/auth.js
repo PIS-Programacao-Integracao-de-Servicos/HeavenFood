@@ -16,7 +16,7 @@ export function updateAuthContainer(data) {
         console.log('Utilizador autenticado:', data.user.nome);
         let dropdownContent = `
             <li>
-                <a href="/">Perfil</a>
+                <a href="/profile">Perfil</a>
             </li>
         `;
 
@@ -34,7 +34,7 @@ export function updateAuthContainer(data) {
                 <a href="" id="logout-btn">Terminar sessão</a>
             </li>
         `;
-        const userImage = data.user.isAdmin ? '../assets/male-user-admin.png' : '../assets/male-user.png';
+        const userImage = data.user.isAdmin ? '/assets/male-user-admin.png' : '/assets/male-user.png';
 
         authContainer.innerHTML = `
             <li id="user-profile"><img src="${userImage}">
