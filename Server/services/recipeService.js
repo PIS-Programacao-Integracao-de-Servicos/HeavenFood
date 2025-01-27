@@ -1,6 +1,7 @@
 const axios = require('axios');
 const https = require('https');
 const recipeModel = require('../models/recipeModel');
+const db = require('../config/dbConnection');
 
 const getRecipes = async () => {
     let dbResults = await recipeModel.getAllRecipes();
@@ -111,8 +112,39 @@ const getRecipeById = async (id) => {
     }
 };
 
+const getRecipeByName = async (name) => {
+    let apiRecipes = [];
+    try {
+        const agent = new https.Agent({
+            rejectUnauthorized: false,
+        });
+
+        const apiResponse = await axios.get(`https://www.themealdb.com/api/json/v1/1/search.php?s=${name}`, {
+            httpsAgent: agent,
+        });
+        apiRecipes = apiResponse.data.meals || [];
+
+    } catch (error) {
+        console.error('Erro ao buscar todas as receitas na API:', error.message);
+    }
+
+    const formattedApiRecipes = apiRecipes.map((meal) => ({
+        id: parseInt(meal.idMeal),
+        nome: meal.strMeal,
+        categoria: meal.strCategory,
+        image_url: meal.strMealThumb,
+        source: 'api'
+    }));
+
+    return [formattedApiRecipes];
+}
+
+
+
+
 module.exports = {
     getRecipes,
     getAllRecipes,
     getRecipeById,
+    getRecipeByName,
 };

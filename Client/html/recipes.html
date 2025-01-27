@@ -18,7 +18,7 @@
                 <img src="../assets/logo_without_background.png" alt="Food Heaven Logo" class="logo-image">
                 <a href="/" class="title">HeavenFood</a>
             </div>
-
+            
             <ul class="nav-links">
                 <li><a href="/recipes">Receitas</a></li>
                 <li><a href="/aboutus">Sobre Nós</a></li>
@@ -32,8 +32,15 @@
 
 
     <main>
+        <nav class="categories"></nav>
+        <form class="search-form" action="">
+            <input type="search" class="search-input" id="search-bar" placeholder="Pesquisar receitas">
+            <button id="search-button" class="search-button" onclick="">Pesquisar</button>
+        </form>
+
         <h1 class="title featured-recipes">Todas as receitas</h1>
         <div class="recipes-grid" id="recipes-container"></div>
+        
     </main>
 
         <footer>
