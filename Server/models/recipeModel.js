@@ -50,7 +50,38 @@ const getRecipeById = async (id) => {
     };
 };
 
+const insertRecipe = async (recipe) => {
+    const { nome, descricao_preparacao, categoria_id, image_url, autor, dificuldade, tempo, custo } = recipe;
+    await db.promise().query(
+        'INSERT INTO Receita (nome, descricao_preparacao, categoria_id, image_url, autor, dificuldade, tempo, custo) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
+        [nome, descricao_preparacao, categoria_id, image_url, autor, dificuldade, tempo, custo]
+    );
+};
+
+const updateRecipe = async (id, recipe) => {
+    const { nome, descricao_preparacao, categoria_id, image_url, autor, dificuldade, tempo, custo } = recipe;
+    await db.promise().query(
+        'UPDATE Receita SET nome = ?, descricao_preparacao = ?, categoria_id = ?, image_url = ?, autor = ?, dificuldade = ?, tempo = ?, custo = ? WHERE id = ?',
+        [nome, descricao_preparacao, categoria_id, image_url, autor, dificuldade, tempo, custo, id]
+    );
+};
+
+const deleteRecipe = async (id) => {
+    await db.promise().query('DELETE FROM Receita WHERE id = ?', [id]);
+};
+
+const getAllRecipesWithDetails = async () => {
+    const [rows] = await db.promise().query('SELECT id, nome, descricao_preparacao, categoria_id, image_url, autor, dificuldade, tempo, custo FROM Receita');
+
+    return rows;
+    
+};
+
 module.exports = {
     getAllRecipes,
     getRecipeById,
+    insertRecipe,
+    updateRecipe,
+    deleteRecipe,
+    getAllRecipesWithDetails,
 };

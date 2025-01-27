@@ -36,9 +36,57 @@ const getRecipeById = async (req, res) => {
     }
 };
 
+const addRecipe = async (req, res) => {
+    try {
+        await recipeService.addRecipe(req.body);
+        res.status(201).json({ message: 'Receita adicionada com sucesso!' });
+    } catch (error) {
+        console.error('Erro ao adicionar receita:', error.message);
+        res.status(500).json({ message: 'Erro ao adicionar receita.' });
+    }
+};
+
+const updateRecipe = async (req, res) => {
+    const { id } = req.params;
+    try {
+        await recipeService.updateRecipe(id, req.body);
+        res.status(200).json({ message: 'Receita atualizada com sucesso!' });
+    } catch (error) {
+        console.error('Erro ao atualizar receita:', error.message);
+        res.status(500).json({ message: 'Erro ao atualizar receita.' });
+    }
+};
+
+const deleteRecipe = async (req, res) => {
+    const { id } = req.params;
+    try {
+        await recipeService.deleteRecipe(id);
+        res.status(200).json({ message: 'Receita removida com sucesso!' });
+    } catch (error) {
+        console.error('Erro ao remover receita:', error.message);
+        res.status(500).json({ message: 'Erro ao remover receita.' });
+    }
+};
+
+const getAllRecipesWithDetails = async (req, res) => {
+    try {
+        const recipes = await recipeService.getAllRecipesWithDetails();
+        res.status(200).json(recipes);
+    } catch (error) {
+        console.error('Erro ao buscar todas as receitas com detalhes:', error.message);
+        res.status(500).json({ message: 'Erro ao buscar todas as receitas com detalhes.' });
+    }
+    console.log('getAllRecipesWithDetails - recipes:', recipes);
+
+};
+
 
 module.exports = {
     getRecipes,
     getAllRecipes,
     getRecipeById,
+    addRecipe,
+    updateRecipe,
+    deleteRecipe,
+    getAllRecipesWithDetails,
 };

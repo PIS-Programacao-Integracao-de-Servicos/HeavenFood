@@ -61,3 +61,11 @@ app.get('/', (req, res) => {
 app.listen(port, () => {
   console.log(`Servidor rodando na porta ${port}`);
 });
+
+app.get('/dashboard', (req, res) => {
+  res.sendFile(path.join(__dirname, '../Client/html/dashboard.html'));
+});
+
+app.get('/manageRecipes', (req, res) => {
+  res.sendFile(path.join(__dirname, '../Client/html/manageRecipes.html'));
+});
