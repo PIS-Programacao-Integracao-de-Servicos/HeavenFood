@@ -38,7 +38,7 @@ cd heavenfood
 
 3.Instale as dependências:
  ```  
-npm install express axios mysql2 path https
+npm install express axios mysql2 path https session cors
 ```
 
 4.Configure o banco de dados:
@@ -102,6 +102,8 @@ node server.js
 * `GET /recipes/api/categories`: Listagem de todas as categorias.
 * `GET /recipes/api/categories/:id`: Listagem de receitas por categoria.
 * `GET /recipes/api/:id`: Detalhes de uma receita.
+* `GET /recipes/api/update/`: Atualizar receitas (só está presente no backend).
+* `GET /recipes/api/delete/`: Remover receitas (só está presente no backend).
 
 ### Favoritos
 * `POST /favorites/add`: Adição de receita aos favoritos.
@@ -109,12 +111,12 @@ node server.js
 * `GET /favorites/:utilizador_id`: Listagem de receitas favoritadas por um usuário.
 
 ### Importação de Receitas
-* `GET /import/data`: Importação de receitas da API externa.
+* `GET /import/data`: Importação de receitas da API externa. (só está presente no backend)
 
 ### Dashboard Admin
 # manageRecipes.js
 
-O ficheiro `manageRecipes.js` é responsável por gerenciar a exibição, adição, atualização e remoção de receitas na página de administração de receitas. Ele faz requisições à API para obter os dados das receitas e manipula o DOM para exibir essas informações em uma tabela.
+O ficheiro `manageRecipes.js` é responsável por remoção de receitas na página de administração de receitas. Ele faz requisições à API para obter os dados das receitas e manipula o DOM para exibir essas informações em uma tabela.
 
 ## Funcionalidades
 
