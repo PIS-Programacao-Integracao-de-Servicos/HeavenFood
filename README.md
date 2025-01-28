@@ -70,6 +70,9 @@ node server.js
 
 ### SQL
 * `\SQL\createDatabase.sql`: Script SQL para criar e configurar a base de dados.
+* 
+### Administrador
+* Após a criação de uma conta de utilizador, é necessário atualizar a sua role para administrador = 1 (TRUE)
 
 ## Funcionalidades
 ### Usuários
