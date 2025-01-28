@@ -38,7 +38,7 @@ cd heavenfood
 
 3.Instale as dependências:
  ```  
-npm install
+npm install express axios mysql2 path https
 ```
 
 4.Configure o banco de dados:
